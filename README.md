@@ -1,2 +1,2 @@
 # E-commerce-Website
-Full stack project using react, python and django. 
+Full stack project using react, python, django and PostgreSQL
