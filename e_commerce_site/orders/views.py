@@ -10,7 +10,7 @@ from .serializers import OrderSerializer
 from .serializers import PopulatedOrderSerializer
 
 
-class KitDetailView(APIView):
+class OrderDetailView(APIView):
     def delete(self, request, pk):
         try:
             ord = Order.objects.get(id=pk)
@@ -34,7 +34,7 @@ class KitDetailView(APIView):
         return Response(serialized_item.data, status=status.HTTP_200_OK)
 
 
-class KitListView(APIView):
+class OrderListView(APIView):
     # POST /order/
     def post(self, request):
         ord = OrderSerializer(data=request.data)
