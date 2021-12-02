@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 # Create your models here.
@@ -12,7 +13,8 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=5)
     categorys = models.ForeignKey(
         'category.Category', on_delete=models.CASCADE)
-    owner = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+                              on_delete=models.CASCADE, blank=True)
     description = models.CharField(
         max_length=250, default='', blank=True, null=True)
     image = models.ImageField(upload_to='uploads/products/')

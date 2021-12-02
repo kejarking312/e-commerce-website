@@ -54,7 +54,7 @@ class ProductListView(APIView):
         try:
             prod = ProductSerializor(data=request.data)
             if prod.is_valid():
-                prod.save()
+                prod.save(owner=[request.user])
                 return Response(prod.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(prod.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
