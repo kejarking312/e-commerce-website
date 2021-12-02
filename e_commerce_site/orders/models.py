@@ -6,6 +6,7 @@ import datetime
 
 class Order(models.Model):
     products = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     quantity = models.IntegerField()
     price = models.DecimalField(decimal_places=2, max_digits=6)
     date = models.DateField(default=datetime.datetime.today)

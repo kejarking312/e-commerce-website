@@ -12,6 +12,7 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=5)
     categorys = models.ForeignKey(
         'category.Category', on_delete=models.CASCADE)
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE)
     description = models.CharField(
         max_length=250, default='', blank=True, null=True)
     image = models.ImageField(upload_to='uploads/products/')
