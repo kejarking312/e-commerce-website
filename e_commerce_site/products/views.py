@@ -1,16 +1,22 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.http.response import HttpResponse
-from .models import Product
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+from .models import Product
 from .serializors import ProductSerializor
+
 
 # Create your views here.
 
 
 class ProductDetailView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
     def delete(self, request, pk):
         try:
             prod = Product.objects.get(id=pk)
@@ -41,7 +47,9 @@ class ProductDetailView(APIView):
 
 
 class ProductListView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     # POST product
+
     def post(self, request):
         try:
             prod = ProductSerializor(data=request.data)
