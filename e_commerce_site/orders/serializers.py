@@ -16,8 +16,3 @@ class PopulatedOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
-
-    # one thing: for populating a reverse-relationship,
-    # the "many" table (with the FK) is accessed via "whatever_set"
-    # q: why? a: this is the django way
-    # review_set = ReviewSerializer(read_only=True, many=True)

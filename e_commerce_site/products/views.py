@@ -8,7 +8,8 @@ from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Product
-from .serializors import ProductSerializor
+from .serializers import ProductSerializer
+from .serializers import PopulatedProductSerializer
 
 
 # Create your views here.
@@ -28,7 +29,7 @@ class ProductDetailView(APIView):
     def put(self, request, pk):
         try:
             prod = Product.objects.get(id=pk)
-            updated_prod = ProductSerializor(prod, data=request.data)
+            updated_prod = ProductSerializer(prod, data=request.data)
             if updated_prod.is_valid():
                 updated_prod.save()
                 return Response(updated_prod.data, status=status.HTTP_202_ACCEPTED)
@@ -40,7 +41,7 @@ class ProductDetailView(APIView):
     def get(self, request, pk):
         try:
             prod = Product.objects.get(id=pk)
-            serialized_prod = ProductSerializor(prod)
+            serialized_prod = ProductSerializer(prod)
             return Response(serialized_prod.data, status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -52,7 +53,7 @@ class ProductListView(APIView):
 
     def post(self, request):
         try:
-            prod = ProductSerializor(data=request.data)
+            prod = ProductSerializer(data=request.data)
             if prod.is_valid():
                 prod.save(owner=[request.user])
                 return Response(prod.data, status=status.HTTP_201_CREATED)
@@ -65,7 +66,8 @@ class ProductListView(APIView):
     def get(self, request):
         try:
             products = Product.objects.all()
-            serialized_products = ProductSerializor(products, many=True)
+            serialized_products = ProductSerializer(
+                products, many=True)
             return Response(serialized_products.data, status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
