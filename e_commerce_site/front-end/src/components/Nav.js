@@ -1,14 +1,17 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { getToken } from '../helpers/auth'
+import { removeToken } from '../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
-const Nav = ( ) => {
+const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
+  const navigate = useNavigate()
   
-  const isUserLoggedIn = () => {
-
-    return getToken()
+  const handleLogout = () => {
+    removeToken()
+    setIsLoggedIn(false)
+    navigate('/')
   }
-  
+
   return (
     <div className='main-header-div'>
       <div className='logo-div'>
@@ -23,11 +26,22 @@ const Nav = ( ) => {
             <li>
               <Link className='nav-link' to="/products">Products</Link>
             </li>
-  
-            <li>
-              <Link className='nav-link' to="/login">Log In</Link>
-            </li>
-              
+            {isLoggedIn ? (
+              <>
+                <li>
+                  <span className='nav-link' onClick={handleLogout}>Logout</span>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link className='nav-link' to="/login">Log In</Link>
+                </li>
+                <li>
+                  <Link className='nav-link' to="/register">Sign Up</Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>    
