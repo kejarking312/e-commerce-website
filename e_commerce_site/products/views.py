@@ -66,10 +66,8 @@ class ProductListView(APIView):
     def get(self, request):
         try:
             products = Product.objects.all()
-            print(products)
             serialized_products = PopulatedProductSerializer(
                 products, many=True)
-            print(serialized_products)
             return Response(serialized_products.data, status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)

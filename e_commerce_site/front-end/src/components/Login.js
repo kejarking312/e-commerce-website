@@ -32,7 +32,7 @@ const Login = ({ setIsLoggedIn }) => {
       setToken(response.data.token)
       setIsLoggedIn(true)
       setIsError(false)
-      navigate('/home')
+      navigate('/')
     } catch (err) {
       console.log(err)
       setIsError(true)
@@ -49,8 +49,8 @@ const Login = ({ setIsLoggedIn }) => {
 
   return (
     <div>
-      <h1>Sign in to Shop</h1>
       <form onSubmit={handleSubmit}>
+        <h1>Sign in to Shop</h1>
         <div>
           <input placeholder="email@email.com" type='text' value={email} onChange={handleEmailChange} />
           <input placeholder="password" type='password' value = {password} onChange={handlePasswordChange} />
