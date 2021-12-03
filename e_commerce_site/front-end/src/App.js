@@ -1,9 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+import { Routes, Route } from 'react-router-dom'
+
 import ProductList from './components/ProductList'
 import ProductShow from './components/ProductShow'
+import Login from './components/Login'
 import NotFound from './components/NotFound'
-import { Routes, Route } from 'react-router-dom'
+import Home from './components/Home'
 
 function App() {
   React.useEffect(() => {
@@ -21,7 +24,7 @@ function App() {
         <header>
         </header>
         <main>
-          <h1>Welcome to the Shop</h1>
+          <Home />
         </main>
         <footer>
           
@@ -78,11 +81,29 @@ function App() {
     )
   }
 
+  function UserLogIn() {
+    
+    return (
+      <>
+        <header>
+          
+        </header>
+        <main>
+          <Login />
+        </main>
+        <footer>
+          
+        </footer>
+      </>
+    )
+  }
+
   return (
     <>
       <Routes>
         <Route path="/products/:id" element={<ShowOneProduct />} />
         <Route path="/products/" element={<Products />}/>
+        <Route path="/login" element={<UserLogIn />} />
         <Route index element={<HomePage />} />
         <Route element={<NotFoundPage />} />
       </Routes>
