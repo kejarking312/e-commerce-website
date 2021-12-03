@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import ProductList from './components/ProductList'
+import ProductShow from './components/ProductShow'
 import NotFound from './components/NotFound'
 import { Routes, Route } from 'react-router-dom'
 
@@ -44,6 +45,22 @@ function App() {
     )
   }
 
+  function ShowOneProduct() {
+    
+    return (
+      <>
+        <header>
+        </header>
+        <main>
+          <ProductShow />
+        </main>
+        <footer>
+          
+        </footer>
+      </>
+    )
+  }
+
   function NotFoundPage() {
   
     return (
@@ -64,7 +81,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/movies" element={<Products />}/>
+        <Route path="/products/:id" element={<ShowOneProduct />} />
+        <Route path="/products/" element={<Products />}/>
         <Route index element={<HomePage />} />
         <Route element={<NotFoundPage />} />
       </Routes>

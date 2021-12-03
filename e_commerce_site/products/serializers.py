@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Product
 from jwt_auth.serializers import UserSerializer
 from category.serializers import CategorySerializer
+from jwt_auth.serializers import SimpleUserSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -11,5 +12,5 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class PopulatedProductSerializer(ProductSerializer):
-    owner = UserSerializer(many=True)
-    categorys = CategorySerializer(many=True)
+    owner = UserSerializer()
+    categorys = CategorySerializer()
