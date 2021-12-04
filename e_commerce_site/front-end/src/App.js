@@ -6,6 +6,7 @@ import { getToken } from './helpers/auth'
 
 import ProductList from './components/ProductList'
 import ProductShow from './components/ProductShow'
+import ProductAdd from './components/ProductAdd'
 import Login from './components/Login'
 import Register from './components/Register'
 import NotFound from './components/NotFound'
@@ -100,6 +101,32 @@ function App() {
     )
   }
 
+  function AddOneProduct() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
+    useEffect(() => {
+      if (getToken()) {
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }, [])
+    
+    return (
+      <>
+        <header>
+          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </header>
+        <main>
+          <ProductAdd />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    )
+  }
+
   function NotFoundPage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -181,6 +208,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/products/addproduct" element={<AddOneProduct />} />
         <Route path="/products/:id" element={<ShowOneProduct />} />
         <Route path="/products/" element={<Products />}/>
         <Route path="/login" element={<UserLogIn />} />

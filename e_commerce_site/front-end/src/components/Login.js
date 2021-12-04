@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { setToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
+import { getAxiosRequestConfig } from '../helpers/api'
 import FormInput from '../components/FormInput'
 import Form from 'react-bootstrap/Form'
 
@@ -19,14 +20,7 @@ const Login = ({ setIsLoggedIn }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
         
-    const config = {
-      method: 'post',
-      url: 'http://localhost:8000/api/auth/login/',
-      headers: { 
-        'Content-Type': 'application/json',
-      },
-      data: data,
-    }
+    const config = getAxiosRequestConfig('/login', data)
     
     try {
       const response = await axios(config).catch(handleError)
