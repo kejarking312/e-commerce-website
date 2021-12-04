@@ -1,11 +1,17 @@
 from rest_framework import serializers
 from .models import Product
+from category.models import Category
 from jwt_auth.serializers import UserSerializer
 from category.serializers import CategorySerializer
 from jwt_auth.serializers import SimpleUserSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    # category = serializers.SlugRelatedField(
+    #     slug_field='categorys',
+    #     queryset=Category.objects.all()
+    # )
+
     class Meta:
         model = Product
         fields = '__all__'
