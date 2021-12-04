@@ -4,15 +4,15 @@ import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getToken } from './helpers/auth'
 
-import ProductList from './components/ProductList'
-import ProductShow from './components/ProductShow'
+import Home from './pages/Home'
+import ProductShow from './pages/ProductShow'
+import ProductList from './pages/ProductList'
+import NotFound from './pages/NotFound'
 import ProductAdd from './components/ProductAdd'
 import Login from './components/Login'
 import Register from './components/Register'
-import NotFound from './components/NotFound'
-import Home from './components/Home'
-import Footer from './components/Footer'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 
 function App() {
   React.useEffect(() => {

@@ -1,0 +1,24 @@
+.product-card {
+  padding: 0.8rem;
+  flex-basis: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  .card-img-top .card-image {
+    border: red;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    .card-title {
+      text-align: center;
+      color: red;
+    }
+    .card-text {
+      text-align: center;
+      color: red;
+    }
+  }
+}
