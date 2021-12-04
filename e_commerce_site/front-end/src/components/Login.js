@@ -2,22 +2,23 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { setToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
+import FormInput from '../components/FormInput'
+import Form from 'react-bootstrap/Form'
 
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  })
+  const [errorInfo, setErrorInfo] = useState({})
   const [isError, setIsError] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = ({
-      email,
-      password,
-    })
-    
+        
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/auth/login/',
@@ -28,7 +29,7 @@ const Login = ({ setIsLoggedIn }) => {
     }
     
     try {
-      const response = await axios(config)
+      const response = await axios(config).catch(handleError)
       setToken(response.data.token)
       setIsLoggedIn(true)
       setIsError(false)
@@ -39,31 +40,48 @@ const Login = ({ setIsLoggedIn }) => {
     }
   }
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
+  const handleError = (error) => {
+    if (error.response) {
+      setErrorInfo(error.response.data)
+      setIsError(true)
+    }
   }
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
+  const handleFormChange = (event) => {
+    const { name, value } = event.target
+    setData({
+      ...data,
+      [name]: value,
+    })
   }
+
+  const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Sign in to Shop</h1>
-        <div>
-          <input placeholder="email@email.com" type='text' value={email} onChange={handleEmailChange} />
-          <input placeholder="password" type='password' value = {password} onChange={handlePasswordChange} />
-          <input type='submit' value='login' />
-        </div>
-        {isError ? (
-          <div className='error'>
-            <p>Error. Please try again.</p>
-          </div> 
-        ) : (
-          <></>
-        )}
-      </form>
+    <div className="form-box">
+      <h1>Sign in to Shop</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <FormInput 
+            placeholder="email@email.com" 
+            type='text'
+            name='email' 
+            {...formInputProps}  />
+          <FormInput 
+            placeholder='password' 
+            type='password'
+            name='password' 
+            {...formInputProps} />
+          <Form.Control type='submit' value='login' />
+          {isError ? (
+            <div className='error'>
+              <p>Error. Please try again.</p>
+            </div> 
+          ) : (
+            <></>
+          )}
+        </Form.Group>
+      </Form>
     </div>
   )
 }

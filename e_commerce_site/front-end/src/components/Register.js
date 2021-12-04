@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { setToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
+import FormInput from './FormInput'
+import Form from 'react-bootstrap/Form'
 
 
 const Register = () => {
@@ -18,6 +20,8 @@ const Register = () => {
     address: '',
   })
 
+  const [errorInfo, setErrorInfo] = useState({})
+
   const [isError, setIsError] = useState(false)
 
   const handleSubmit = async (event) => {
@@ -33,12 +37,19 @@ const Register = () => {
     }
     
     try {
-      const response = await axios(config)
+      const response = await axios(config).catch(handleError)
       setToken(response.data.token)
       setIsError(false)
-      navigate('/')
+      navigate('/login')
     } catch (err) {
       console.log(err)
+      setIsError(true)
+    }
+  }
+
+  const handleError = (error) => {
+    if (error.response) {
+      setErrorInfo(error.response.data)
       setIsError(true)
     }
   }
@@ -52,21 +63,53 @@ const Register = () => {
     console.log(data)
   }
 
+  const formInputProps = { data, errorInfo, handleFormChange }
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-box">
+      <Form onSubmit={handleSubmit}>
         <h1>Sign in to Shop</h1>
-        <div>
-          <input placeholder="username" type='text' name='username' value={data.username} onChange={handleFormChange} />
-          <input placeholder="email@email.com" type='text' name='email' value={data.email} onChange={handleFormChange} />
-          <input placeholder="password" type='password' name='password' value = {data.password} onChange={handleFormChange} />
-          <input placeholder="confirm password" type='password' name='password_confirmation' value={data.password_confirmation} onChange={handleFormChange} />
-          <input placeholder="first name" type='text' name='first_name' value = {data.first_name} onChange={handleFormChange} />
-          <input placeholder="surname" type='text' name='last_name' value = {data.last_name} onChange={handleFormChange} />
-          <input placeholder="phone" type='text' name='phone' value = {data.last_name} onChange={handleFormChange} />
-          <input placeholder="address" type='text' name='address' value = {data.address} onChange={handleFormChange} />
-          <input type='submit' value='register' />
-        </div>
+        <FormInput 
+          placeholder="username" 
+          type='text' 
+          name='username' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="email@email.com" 
+          type='text' 
+          name='email' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="password" 
+          type='password' 
+          name='password' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="confirm password" 
+          type='password' 
+          name='password_confirmation' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="first name" 
+          type='text' 
+          name='first_name' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="surname" 
+          type='text' 
+          name='last_name' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="phone" 
+          type='text' 
+          name='phone' 
+          {...formInputProps} />
+        <FormInput 
+          placeholder="address" 
+          type='text' 
+          name='address' 
+          {...formInputProps} />
+        <Form.Control type='submit' value='register' />
         {isError ? (
           <div className='error'>
             <p>Error. Please try again.</p>
@@ -74,7 +117,7 @@ const Register = () => {
         ) : (
           <></>
         )}
-      </form>
+      </Form>
     </div>
   )
 }
