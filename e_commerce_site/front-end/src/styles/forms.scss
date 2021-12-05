@@ -1,4 +1,6 @@
-.form-section {
+@import "colours";
+
+.form-div {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -10,26 +12,26 @@
     padding: 1% 3% 3% 3%;
     margin: auto;
     width: 30%;
-    border: 2px solid red;
+    border: 2px solid $primary-background;
     border-radius: 5px;
     text-align: center;
-    background-color: darkgrey;
+    background-color: $form-background;
     h1 {
       font-family: "Pacifico";
-      color: red;
+      color: $form-text;
     }
     .form {
       margin: 2%;
       input {
         margin: 9px auto;
-        color: red;
-        background-color: darkgrey;
+        color: $form-text;
+        background-color: $form-background;
         text-align: center;
       }
       .form-select {
         margin: 9px auto;
-        color: red;
-        background-color: darkgrey;
+        color: $form-text;
+        background-color: $form-background;
         text-align: center;
       }
     }

@@ -52,30 +52,32 @@ const Login = ({ setIsLoggedIn }) => {
   const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
-    <div className="form-box">
-      <h1>Sign in to Shop</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <FormInput 
-            placeholder="email@email.com" 
-            type='text'
-            name='email' 
-            {...formInputProps}  />
-          <FormInput 
-            placeholder='password' 
-            type='password'
-            name='password' 
-            {...formInputProps} />
-          <Form.Control type='submit' value='login' />
-          {isError ? (
-            <div className='error'>
-              <p>Error. Please try again.</p>
-            </div> 
-          ) : (
-            <></>
-          )}
-        </Form.Group>
-      </Form>
+    <div className="form-div">
+      <div className="form-box">
+        <h1>Sign in to Shop</h1>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <FormInput 
+              placeholder="email@email.com" 
+              type='text'
+              name='email' 
+              {...formInputProps}  />
+            <FormInput 
+              placeholder='password' 
+              type='password'
+              name='password' 
+              {...formInputProps} />
+            <Form.Control type='submit' value='login' />
+            {isError ? (
+              <div className='error'>
+                <p>Error. Please try again.</p>
+              </div> 
+            ) : (
+              <></>
+            )}
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+@import "colours";
+
 .product-card {
   padding: 0.8rem;
   flex-basis: 200px;
@@ -5,20 +7,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: grey;
-  .card-img-top .card-image {
-    border: red;
-  }
+  background-color: $form-background;
+
   .card-body {
     display: flex;
     flex-direction: column;
     .card-title {
       text-align: center;
-      color: red;
+      color: $secondary-text;
     }
     .card-text {
       text-align: center;
-      color: red;
+      color: $secondary-text;
+    }
+    .product-link {
+      .card-image {
+        border: $secondary-text;
+      }
     }
   }
 }

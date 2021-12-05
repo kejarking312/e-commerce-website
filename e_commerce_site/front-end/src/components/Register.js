@@ -60,58 +60,60 @@ const Register = () => {
   const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
-    <div className="form-box">
-      <Form onSubmit={handleSubmit}>
-        <h1>Sign in to Shop</h1>
-        <FormInput 
-          placeholder="username" 
-          type='text' 
-          name='username' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="email@email.com" 
-          type='text' 
-          name='email' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="password" 
-          type='password' 
-          name='password' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="confirm password" 
-          type='password' 
-          name='password_confirmation' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="first name" 
-          type='text' 
-          name='first_name' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="surname" 
-          type='text' 
-          name='last_name' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="phone" 
-          type='text' 
-          name='phone' 
-          {...formInputProps} />
-        <FormInput 
-          placeholder="address" 
-          type='text' 
-          name='address' 
-          {...formInputProps} />
-        <Form.Control type='submit' value='register' />
-        {isError ? (
-          <div className='error'>
-            <p>Error. Please try again.</p>
-          </div> 
-        ) : (
-          <></>
-        )}
-      </Form>
+    <div className="form-div">
+      <div className="form-box">
+        <Form onSubmit={handleSubmit}>
+          <h1>Sign in to Shop</h1>
+          <FormInput 
+            placeholder="username" 
+            type='text' 
+            name='username' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="email@email.com" 
+            type='text' 
+            name='email' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="password" 
+            type='password' 
+            name='password' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="confirm password" 
+            type='password' 
+            name='password_confirmation' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="first name" 
+            type='text' 
+            name='first_name' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="surname" 
+            type='text' 
+            name='last_name' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="phone" 
+            type='text' 
+            name='phone' 
+            {...formInputProps} />
+          <FormInput 
+            placeholder="address" 
+            type='text' 
+            name='address' 
+            {...formInputProps} />
+          <Form.Control type='submit' value='register' />
+          {isError ? (
+            <div className='error'>
+              <p>Error. Please try again.</p>
+            </div> 
+          ) : (
+            <></>
+          )}
+        </Form>
+      </div>
     </div>
   )
 }

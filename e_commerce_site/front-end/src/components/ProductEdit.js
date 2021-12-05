@@ -62,24 +62,26 @@ const ProductEdit = () => {
   const formInputProps = { data: product, errorInfo, handleFormChange }
 
   return (
-    <div className="form-box">
-      <Form className="form" onSubmit={handleSubmit}>
-        <h1>Edit a Product</h1>
-        <ProductForm formInputProps={formInputProps} />
-        <div>
-          <Form.Control type="submit" value="Edit Product" />
-        </div>
-        <div>
-          <Button className="button" onClick={() => navigate(-1)}>go back</Button>
-        </div>
-        {isError ? (
-          <div className="error">
-            <p>Error. Please try again</p>
+    <div className="form-div">
+      <div className="form-box">
+        <Form className="form" onSubmit={handleSubmit}>
+          <h1>Edit a Product</h1>
+          <ProductForm formInputProps={formInputProps} />
+          <div>
+            <Form.Control type="submit" value="Edit Product" />
           </div>
-        ) : (
-          <></>
-        )}
-      </Form>
+          <div>
+            <Button className="button" onClick={() => navigate(-1)}>go back</Button>
+          </div>
+          {isError ? (
+            <div className="error">
+              <p>Error. Please try again</p>
+            </div>
+          ) : (
+            <></>
+          )}
+        </Form>
+      </div>
     </div>
   )
 }

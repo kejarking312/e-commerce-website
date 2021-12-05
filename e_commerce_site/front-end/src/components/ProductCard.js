@@ -13,11 +13,11 @@ const ProductCard = ({ _id, brand, type, image, price }) => {
         <Card.Text className="card-text">
           {type}
         </Card.Text>
-        <Link to={`/products/${_id}`}>
+        <Link className="product-link" to={`/products/${_id}`}>
           <Card.Img 
             className="card-image" 
             src={image} alt={type} 
-            style={{ height: '100%', width: '50%' }} />
+            style={{ height: '50%', width: '60%' }} />
         </Link> 
         <Card.Text className="card-text">
           £{price}
