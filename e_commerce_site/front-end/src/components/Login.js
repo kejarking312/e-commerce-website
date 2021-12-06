@@ -46,6 +46,7 @@ const Login = ({ setIsLoggedIn }) => {
     
     try {
       const response = await axios(config).catch(handleError)
+      console.log(response.data.token)
       setToken(response.data.token)
       setIsLoggedIn(true)
       setIsError(false)
@@ -74,7 +75,7 @@ const Login = ({ setIsLoggedIn }) => {
   const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
-    <div className="form-div">
+    <div className="form-section">
       <div className="form-box">
         <h1>Sign in to Shop</h1>
         <Form onSubmit={handleSubmit}>

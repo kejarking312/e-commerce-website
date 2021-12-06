@@ -2,9 +2,12 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from '@restart/ui/esm/Button'
 import { Link } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 const ProductCard = ({ id, brand, type, image, price }) => {
   console.log(brand)
+
+  // const { id } = useParams()
 
   return (
     <Card style={{ width: '18rem' }} className="product-card">

@@ -55,12 +55,12 @@ class ProductListView(APIView):
         try:
             prod = ProductSerializer(data=request.data)
             if prod.is_valid():
-                prod.save(owner=[request.user])
+                prod.save(owner=request.user)
                 return Response(prod.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(prod.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
     # GET products
     def get(self, request):

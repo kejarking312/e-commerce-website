@@ -11,14 +11,14 @@ import ProductForm from './ProductForm'
 const ProductAdd = () => {
   const [data, setData] = useState(
     {
-      brand: 'Nike',
-      type: 'Trainers',
-      colour: 'black',
-      size: '5',
-      price: 99.99,
-      categorys: ['2'],
-      description: 'New',
-      image: 'https://media.gq-magazine.co.uk/photos/5eda54b1dc844dac8d6d3db7/master/w_1920,h_1280,c_limit/20200605-nike-09.jpg',
+      brand: '',
+      type: '',
+      colour: '',
+      size: '',
+      price: '',
+      categorys: '',
+      description: '',
+      image: '',
     })
 
   const [errorInfo, setErrorInfo] = useState({})
@@ -35,12 +35,12 @@ const ProductAdd = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-        
+    console.log(getToken())
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/products/',
       headers: { 
-        'Authorization': `${getToken()}`, 
+        Authorization: `${getToken()}`, 
         'Content-Type': 'application/json',
       },
       data: data,
@@ -68,21 +68,23 @@ const ProductAdd = () => {
   const formInputProps = { data, errorInfo, handleFormChange }
   
   return (
-    <div className="form-box">
-      <h1>Add a Product</h1>
-      <Form onSubmit={handleSubmit} className="form">
-        <ProductForm formInputProps={formInputProps} />
-        <div>
-          <Form.Control id="submit-button" type="submit" value="Add Product" />
-        </div>
-        {isError ? (
-          <div className="error">
-            <p>Error. Please try again</p>
+    <div className="form-section">
+      <div className="form-box">
+        <h1>Add your Item</h1>
+        <Form onSubmit={handleSubmit} className="form">
+          <ProductForm formInputProps={formInputProps} />
+          <div>
+            <Form.Control id="submit-button" type="submit" value="Add Product" />
           </div>
-        ) : (
-          <></>
-        )}
-      </Form>
+          {isError ? (
+            <div className="error">
+              <p>Error. Please try again</p>
+            </div>
+          ) : (
+            <></>
+          )}
+        </Form>
+      </div>
     </div>
   )
 }

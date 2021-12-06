@@ -67,9 +67,10 @@ const Register = () => {
   const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
-    <div className="form-div">
+    
+    <div className="form-section">
       <div className="form-box">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="form">
           <h1>Sign in to Shop</h1>
           <FormInput 
             placeholder="username" 

@@ -53,30 +53,31 @@ const ProductShow = ({ isLoggedIn }) => {
           <h1>
             {products.brand} {products.description}
           </h1>
-          <h2>{products.categorys}</h2>
+          {/* <h2>{products.categorys}</h2> */}
           <p>{products.type}</p>
           <p>{products.size}</p>
           <p>£{products.price}</p>
         </div>
+      
+        {isLoggedIn ? (
+          <>
+            <div id="edit-product-buttons" className="edit-product-buttons">
+              <Button className="button"><Link className="link" to={`/products/${id}/edit`}>Edit</Link></Button>
+              <Button className="button" onClick={handleDeleteClick}>Delete</Button>
+              <Button className="button"><Link className="link" to={`/products/${id}/`}>Favourite</Link></Button>
+              <Button className="button"><Link className="link" to={`/products/${id}/`}>Add to Basket</Link></Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div id="edit-product-buttons" className="edit-product-buttons">
+              <p>Log in to edit this item</p>
+              <Button id="button"  className="button"><Link className="link" to={'/login'}>Log In</Link></Button>
+              <Button id="button" className="button"><Link className="link" to={'/register'}>Sign Up</Link></Button>
+            </div>
+          </>
+        )}
       </div>
-      {isLoggedIn ? (
-        <>
-          <div id="edit-product-buttons" className="edit-product-buttons">
-            <Button className="button"><Link className="link" to={`/products/${id}/edit`}>Edit</Link></Button>
-            <Button className="button" onClick={handleDeleteClick}>Delete</Button>
-            <Button className="button"><Link className="link" to={`/products/${id}/`}>Add to Favourites</Link></Button>
-            <Button className="button"><Link className="link" to={`/products/${id}/`}>Add to Basket</Link></Button>
-          </div>
-        </>
-      ) : (
-        <>
-          <div id="edit-product-buttons" className="edit-product-buttons">
-            <p>Log in to edit this item</p>
-            <Button id="button"  className="button"><Link className="link" to={'/login'}>Log In</Link></Button>
-            <Button id="button" className="button"><Link className="link" to={'/register'}>Sign Up</Link></Button>
-          </div>
-        </>
-      )}
     </div> 
   )
 }
