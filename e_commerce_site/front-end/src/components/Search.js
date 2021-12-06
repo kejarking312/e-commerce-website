@@ -7,17 +7,17 @@ const Search = ({ productData, setProducts }) => {
   let search = ''
   const navigate = useNavigate()
 
-  const filterCharities = () => {
+  const filterProducts = () => {
     const regExSearch = new RegExp(search, 'i')
     console.log('regex', regExSearch)
-    setProducts(productData.filter(charity => {
-      return regExSearch.test(charity.names[0].value)
+    setProducts(productData.filter(product => {
+      return regExSearch.test(product.type[0].value)
     }))
   }
 
   const handleTextInput = (event) => {
     search = event.target.value
-    filterCharities()
+    filterProducts()
     navigate('/')
   }
 
