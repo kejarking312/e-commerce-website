@@ -3,7 +3,8 @@ import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAxiosRequestConfig } from '../helpers/api'
+import { getToken } from '../helpers/auth'
+// import { getAxiosRequestConfig } from '../helpers/api'
 
 import ProductForm from './ProductForm'
 
@@ -35,7 +36,16 @@ const ProductAdd = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
         
-    const config = getAxiosRequestConfig('/products', data)
+    const config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/products/',
+      headers: { 
+        'Authorization': `${getToken()}`, 
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
+    
 
     try {
       const response = await axios(config).catch(handleError)

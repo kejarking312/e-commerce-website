@@ -4,6 +4,7 @@
 @import "header";
 @import "forms";
 @import "product-list";
+@import "product-show";
 
 * {
   box-sizing: border-box;
@@ -37,22 +38,22 @@ body {
 
 .button {
   align-self: center;
-  color: red;
-  border: 2px solid red;
-  background-color: black;
+  color: $primary-text;
+  border: 2px solid $primary-text;
+  background-color: $primary-background;
   border-radius: 5px;
   text-align: center;
   font-size: 0.8rem;
   margin: 1%;
   .link {
     text-decoration: none;
-    color: red;
+    color: $primary-text;
   }
 }
 .button:hover {
-  background-color: darkred;
-  border: 2px solid red;
-  color: black;
+  background-color: $primary-text;
+  border: 2px solid $primary-background;
+  color: $primary-background;
 }
 
 @media screen and (max-width: 300px) and (max-height: 540px) {

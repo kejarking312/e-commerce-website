@@ -29,6 +29,9 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
             {isLoggedIn ? (
               <>
                 <li>
+                  <Link to="/products/addproduct" className='nav-link' >Add Product</Link>
+                </li>
+                <li>
                   <span className='nav-link' onClick={handleLogout}>Logout</span>
                 </li>
               </>

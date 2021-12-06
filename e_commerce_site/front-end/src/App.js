@@ -7,6 +7,7 @@ import { getToken } from './helpers/auth'
 import Home from './pages/Home'
 import ProductShow from './pages/ProductShow'
 import ProductList from './pages/ProductList'
+import ProductEdit from './components/ProductEdit'
 import NotFound from './pages/NotFound'
 import ProductAdd from './components/ProductAdd'
 import Login from './components/Login'
@@ -92,7 +93,7 @@ function App() {
           <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
-          <ProductShow />
+          <ProductShow isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         </main>
         <footer>
           <Footer />
@@ -119,6 +120,32 @@ function App() {
         </header>
         <main>
           <ProductAdd />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    )
+  }
+
+  function EditOneProduct() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
+    useEffect(() => {
+      if (getToken()) {
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }, [])
+    
+    return (
+      <>
+        <header>
+          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </header>
+        <main>
+          <ProductEdit />
         </main>
         <footer>
           <Footer />
@@ -209,6 +236,7 @@ function App() {
     <>
       <Routes>
         <Route path="/products/addproduct" element={<AddOneProduct />} />
+        <Route path="/products/:id/edit" element={<EditOneProduct />} />
         <Route path="/products/:id" element={<ShowOneProduct />} />
         <Route path="/products/" element={<Products />}/>
         <Route path="/login" element={<UserLogIn />} />

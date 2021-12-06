@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { setToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
-import { getAxiosRequestConfig } from '../helpers/api'
+// import { login } from '../helpers/api'
+// import { getAxiosRequestConfig } from '../helpers/api'
 import FormInput from '../components/FormInput'
 import Form from 'react-bootstrap/Form'
 
@@ -17,10 +18,31 @@ const Login = ({ setIsLoggedIn }) => {
   const [errorInfo, setErrorInfo] = useState({})
   const [isError, setIsError] = useState(false)
 
+  // const handleSuccessfulLogin = ({ token }) => {
+  //   setToken(token)
+  //   setIsLoggedIn(true)
+  //   setIsError(false)
+  //   navigate('/')
+  // }
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+
+  //   login(data).then(handleSuccessfulLogin).catch(handleError)
+
+  // }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
         
-    const config = getAxiosRequestConfig('/login', data)
+    const config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/auth/login/',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
     
     try {
       const response = await axios(config).catch(handleError)

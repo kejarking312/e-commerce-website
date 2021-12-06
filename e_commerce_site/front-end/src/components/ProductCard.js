@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Button from '@restart/ui/esm/Button'
 import { Link } from 'react-router-dom'
 
-const ProductCard = ({ _id, brand, type, image, price }) => {
+const ProductCard = ({ id, brand, type, image, price }) => {
   console.log(brand)
 
   return (
@@ -13,7 +13,7 @@ const ProductCard = ({ _id, brand, type, image, price }) => {
         <Card.Text className="card-text">
           {type}
         </Card.Text>
-        <Link className="product-link" to={`/products/${_id}`}>
+        <Link className="product-link" to={`/products/${id}/`}>
           <Card.Img 
             className="card-image" 
             src={image} alt={type} 
@@ -23,7 +23,7 @@ const ProductCard = ({ _id, brand, type, image, price }) => {
           £{price}
         </Card.Text>
         <Button className="button">
-          <Link className="link" to={`/products/${_id}`} >More Info</Link>
+          <Link className="link" to={`/products/${id}/`} >More Info</Link>
         </Button>
         {/* <Button className="button">
           <Link className="link" >Add to Basket</Link>

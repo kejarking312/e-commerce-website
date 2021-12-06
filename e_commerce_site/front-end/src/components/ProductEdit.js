@@ -2,13 +2,14 @@ import axios from 'axios'
 import * as React from 'react' 
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { fetchOneProduct, getAxiosRequestConfig } from '../helpers/api'
+import { getToken } from '../helpers/auth'
+import { fetchOneProduct } from '../helpers/api'
 import ProductForm from './ProductForm'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const ProductEdit = () => {
-  const [product, setProduct] = useState({
+  const [data, setData] = useState({
     brand: '',
     type: '',
     colour: '',
@@ -25,7 +26,7 @@ const ProductEdit = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetchOneProduct(id).then(setProduct)
+    fetchOneProduct(id).then(setData)
   }, [id])
 
   const handleError = (error) => {
@@ -35,10 +36,22 @@ const ProductEdit = () => {
     }
   }
 
+
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const config = getAxiosRequestConfig(`/products/${id}`, product, 'put')
+    const config = {
+      method: 'put',
+      url: `http://localhost:8000/api/products/${id},`,
+      headers: { 
+        'Authorization': `${getToken()}`, 
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
+
+    // const config = getAxiosRequestConfig(`/products/${id}`, product, 'put')
 
     try {
       const response = await axios(config).catch(handleError)
@@ -53,13 +66,13 @@ const ProductEdit = () => {
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
-    setProduct({
-      ...product,
+    setData({
+      ...data,
       [name]: value,
     })
   }
 
-  const formInputProps = { data: product, errorInfo, handleFormChange }
+  const formInputProps = { data: data, errorInfo, handleFormChange }
 
   return (
     <div className="form-div">

@@ -3,7 +3,7 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
-  background-color: black;
+  background-color: $form-background;
   .product-list {
     margin: 0 auto;
     padding: 5px;
@@ -14,9 +14,9 @@
     li {
       list-style: none;
       margin: 10px auto;
-      border: 3px solid red;
+      border: 3px solid $primary-text;
       border-radius: 10px;
-      box-shadow: 10px 10px darkred;
+      box-shadow: 10px 10px $secondary-text;
       div {
         height: 100%;
         width: 100%;

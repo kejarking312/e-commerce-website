@@ -4,7 +4,7 @@ import { setToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
 import FormInput from './FormInput'
 import Form from 'react-bootstrap/Form'
-import { getAxiosRequestConfig } from '../helpers/api'
+// import { getAxiosRequestConfig } from '../helpers/api'
 
 
 const Register = () => {
@@ -28,7 +28,14 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     
-    const config = getAxiosRequestConfig('/register', data)
+    const config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/auth/login/',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
     
     try {
       const response = await axios(config).catch(handleError)
