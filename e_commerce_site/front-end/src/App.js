@@ -12,8 +12,9 @@ import NotFound from './pages/NotFound'
 import ProductAdd from './components/ProductAdd'
 import Login from './components/Login'
 import Register from './components/Register'
-import Nav from './components/Nav'
+// import Nav from './components/Nav'
 import Footer from './components/Footer'
+import Nav2 from './components/Nav2'
 
 function App() {
   React.useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
 
   function HomePage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // const [allProducts, setAllProducts] = useState([])
 
     useEffect(() => {
       if (getToken()) {
@@ -35,10 +37,26 @@ function App() {
       }
     }, [])
 
+    // useEffect(() => {
+    //   async function fetchProducts(){
+    //     const config = {
+    //       method: 'get',
+    //       url: 'http://127.0.0.1:8000/api/products/',
+    //       headers: {},
+          
+    //     }
+      
+    //     const response = await axios(config)
+    //     console.log(response.data)
+    //     setAllProducts(response.data)
+    //   }
+    //   fetchProducts()
+    // }, [])
+
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <Home />
@@ -64,7 +82,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <ProductList />
@@ -90,7 +108,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <ProductShow isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
@@ -116,7 +134,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <ProductAdd />
@@ -142,7 +160,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <ProductEdit />
@@ -168,7 +186,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <NotFound />
@@ -194,7 +212,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <Login {...props} setIsLoggedIn={setIsLoggedIn}/>
@@ -220,7 +238,7 @@ function App() {
     return (
       <>
         <header>
-          <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
           <Register />
@@ -238,6 +256,7 @@ function App() {
         <Route path="/products/addproduct" element={<AddOneProduct />} />
         <Route path="/products/:id/edit" element={<EditOneProduct />} />
         <Route path="/products/:id" element={<ShowOneProduct />} />
+        {/* <Route path="/products/mens" element={<Products />}/> */}
         <Route path="/products/" element={<Products />}/>
         <Route path="/login" element={<UserLogIn />} />
         <Route path="/register" element={<UserRegister />} />

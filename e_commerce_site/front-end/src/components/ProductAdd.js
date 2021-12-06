@@ -35,12 +35,13 @@ const ProductAdd = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    console.log('data', data)
     console.log(getToken())
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/products/',
       headers: { 
-        Authorization: `${getToken()}`, 
+        Authorization: `Bearer ${getToken()}`, 
         'Content-Type': 'application/json',
       },
       data: data,
@@ -51,7 +52,7 @@ const ProductAdd = () => {
       const response = await axios(config).catch(handleError)
       console.log(response.data)
       setIsError(false)
-      navigate(`/products/${response.data._id}`)
+      navigate(`/products/${response.data.id}`)
     } catch (err) {
       console.log(err)
     }

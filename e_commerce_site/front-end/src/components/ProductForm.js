@@ -6,6 +6,9 @@ import Form from 'react-bootstrap/Form'
 const ProductForm = ({ formInputProps }) => {
   const handleFormChange = formInputProps.handleFormChange
 
+  // const state = { 
+  //   templateId: '1',
+  // }
 
   return (
     <>
@@ -16,7 +19,7 @@ const ProductForm = ({ formInputProps }) => {
         onChange={handleFormChange}
         {...formInputProps} />
       <Form.Control
-        name='Type'
+        name='type'
         type='text'
         placeholder='Type of clothing'
         onChange={handleFormChange}
@@ -40,17 +43,19 @@ const ProductForm = ({ formInputProps }) => {
         onChange={handleFormChange}
         {...formInputProps} />
       <Form.Select
-        name='category'
+        name='categorys'
         type='text'
         placeholder='Item Category'
         onChange={handleFormChange}
+        // defaultValue={state.templateId}
         {...formInputProps} >
-        <option value='1'>Mens</option>
-        <option value='2'>Womens</option>
-        <option value='3'>Kids</option>
+        <option value="">Choose Your Category</option>
+        <option value="1">Mens</option>
+        <option value="2">Womens</option>
+        <option value="3">Kids</option>
       </Form.Select>
       <Form.Control
-        name='desciption'
+        name='description'
         type='text'
         placeholder='Tell us about your product'
         onChange={handleFormChange}

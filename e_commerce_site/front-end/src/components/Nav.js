@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { removeToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
 
+
 const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate()
   
@@ -13,10 +14,7 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
   }
 
   return (
-    <div className='main-header-div'>
-      <div className='logo-div'>
-        <h1>E-Commerce App</h1>
-      </div>
+    <>
       <div className='nav-div'>
         <nav>
           <ul>
@@ -47,8 +45,10 @@ const Nav = ({ isLoggedIn, setIsLoggedIn }) => {
             )}
           </ul>
         </nav>
-      </div>    
-    </div>
+      </div>
+    </>
+
+ 
   )
 }
 

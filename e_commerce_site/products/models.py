@@ -12,7 +12,7 @@ class Product(models.Model):
     size = models.CharField(max_length=20)
     price = models.DecimalField(decimal_places=2, max_digits=5)
     categorys = models.ForeignKey(
-        'category.Category', on_delete=models.CASCADE)
+        "category.Category", on_delete=models.CASCADE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                               on_delete=models.CASCADE, blank=True)
     description = models.CharField(
