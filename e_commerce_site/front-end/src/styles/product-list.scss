@@ -4,22 +4,41 @@
   width: 100%;
   overflow: scroll;
   background-color: $form-background;
-  .product-list {
-    margin: 0 auto;
-    padding: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  .category-buttons {
+    width: 50%;
+    .all-products-button {
+      width: 50%;
+    }
+    .mens-button {
+      width: 50%;
+    }
+    .womens-button {
+      width: 50%;
+    }
+    .kids-button {
+      width: 50%;
+    }
+  }
+  .product-list-info {
+    padding: 0;
+    height: 100%;
     width: 100%;
-    li {
-      list-style: none;
-      margin: 10px auto;
-      border: 3px solid $primary-text;
-      border-radius: 10px;
-      box-shadow: 10px 10px $secondary-text;
-      div {
-        height: 100%;
-        width: 100%;
+    overflow: scroll;
+    background-color: $form-background;
+    .product-list {
+      margin: 0 auto;
+      padding: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      width: 100%;
+      .product {
+        width: 100px;
+        list-style: none;
+        margin: 10px auto;
+        border: 3px solid $primary-text;
+        border-radius: 10px;
+        box-shadow: 10px 10px $secondary-text;
       }
     }
   }

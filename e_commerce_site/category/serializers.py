@@ -1,5 +1,6 @@
 from django.db import models
 from rest_framework import serializers
+from products.single_serializer import ProductSerializer
 
 # from reviews.serializers import ReviewSerializer
 from .models import Category
@@ -12,7 +13,5 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PopulatedCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
+class PopulatedCategorySerializer(CategorySerializer):
+    products = ProductSerializer(read_only=True, many=True)

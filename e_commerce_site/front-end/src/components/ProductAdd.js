@@ -75,7 +75,7 @@ const ProductAdd = () => {
         <Form onSubmit={handleSubmit} className="form">
           <ProductForm formInputProps={formInputProps} />
           <div>
-            <Form.Control id="submit-button" type="submit" value="Add Product" />
+            <Form.Control id="submit-button" type="submit" value="Add Item" />
           </div>
           {isError ? (
             <div className="error">

@@ -22,6 +22,7 @@ const ProductShow = ({ isLoggedIn }) => {
       }
     
       const response = await axios(config)
+      console.log(response.data)
       setProducts(response.data)
     }
     fetchProducts()
@@ -44,8 +45,6 @@ const ProductShow = ({ isLoggedIn }) => {
       <div className="product-img-div">
         <img className="product-img"
           url={products.image}
-          width={640}
-          height={360}
         />
       </div>
       <div className="product-data-container-div">

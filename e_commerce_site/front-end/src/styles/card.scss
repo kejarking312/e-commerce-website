@@ -12,6 +12,8 @@
   .card-body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .card-title {
       text-align: center;
       color: $secondary-text;
@@ -21,7 +23,12 @@
       color: $secondary-text;
     }
     .product-link {
+      justify-self: center;
+      align-self: center;
+      border: $secondary-text;
       .card-image {
+        justify-self: center;
+        align-self: center;
         border: $secondary-text;
       }
     }

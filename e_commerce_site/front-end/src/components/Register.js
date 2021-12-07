@@ -71,7 +71,7 @@ const Register = () => {
     <div className="form-section">
       <div className="form-box">
         <Form onSubmit={handleSubmit} className="form">
-          <h1>Sign in to Shop</h1>
+          <h1>Register to Shop</h1>
           <FormInput 
             placeholder="username" 
             type='text' 

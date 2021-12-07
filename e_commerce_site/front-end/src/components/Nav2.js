@@ -4,6 +4,12 @@ import { removeToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
 // import Nav from 'react-bootstrap/Nav'
 import { Navbar, Container, NavDropdown, Nav, Form, FormControl, Offcanvas, Button  } from 'react-bootstrap'
+import home from '../styles/images/icons/home-white-24px.png'
+import login from '../styles/images/icons/user-add.png'
+import logout from '../styles/images/icons/user-delete.png'
+import signup from '../styles/images/icons/document-signed.png'
+import search from '../styles/images/icons/search-white.png'
+// import clothing from '../styles/images/icons/clothing.png'
 
 const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate()
@@ -20,10 +26,10 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
         <Container fluid>
           <Navbar.Brand href="/">E-Commerce App</Navbar.Brand>
           <Nav className="me-auto" >
-            <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown title="Clothing" id="basic-nav-dropdown">
+            <Nav.Link href="/"><img src={home} alt="Home" /></Nav.Link>
+            <NavDropdown title="Clothing" id="basic-nav-dropdown" >
               <NavDropdown.Item href="/products">All Clothes</NavDropdown.Item>
-              <NavDropdown.Item href="/products">Mens</NavDropdown.Item>
+              <NavDropdown.Item href="/products/mens">Mens</NavDropdown.Item>
               <NavDropdown.Item href="/products">Womens</NavDropdown.Item>
               <NavDropdown.Item href="/products">Kids</NavDropdown.Item>
               <NavDropdown.Divider />
@@ -49,7 +55,7 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success"><img src={search} alt="Search" /></Button>
           </Form>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Offcanvas
@@ -64,12 +70,12 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {isLoggedIn ? (
                   <>
-                    <Navbar.Text onClick={handleLogout}>Logout</Navbar.Text>
+                    <Navbar.Text onClick={handleLogout}><img src={logout} alt="Log Out" /> Log Out</Navbar.Text>
                   </>
                 ) : (
                   <>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/register">Sign Up</Nav.Link>
+                    <Nav.Link href="/login"><img src={login} alt="Log In" /> Log In</Nav.Link>
+                    <Nav.Link href="/register"><img src={signup} alt="Sign Up" /> Sign Up</Nav.Link>
                   </>
                 )}
               </Nav> 

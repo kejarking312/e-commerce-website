@@ -75,16 +75,16 @@ const ProductEdit = () => {
   const formInputProps = { data: data, errorInfo, handleFormChange }
 
   return (
-    <div className="form-div">
+    <div className="form-section">
       <div className="form-box">
         <Form className="form" onSubmit={handleSubmit}>
-          <h1>Edit a Product</h1>
+          <h1>Edit your Item</h1>
           <ProductForm formInputProps={formInputProps} />
           <div>
-            <Form.Control type="submit" value="Edit Product" />
+            <Form.Control type="submit" value="Edit" />
           </div>
           <div>
-            <Button className="button" onClick={() => navigate(-1)}>go back</Button>
+            <Button className="button" onClick={() => navigate(-1)}>Go Back</Button>
           </div>
           {isError ? (
             <div className="error">

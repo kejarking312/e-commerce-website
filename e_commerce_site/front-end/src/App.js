@@ -7,6 +7,7 @@ import { getToken } from './helpers/auth'
 import Home from './pages/Home'
 import ProductShow from './pages/ProductShow'
 import ProductList from './pages/ProductList'
+// import AllProductList from './pages/AllProductList'
 import ProductEdit from './components/ProductEdit'
 import NotFound from './pages/NotFound'
 import ProductAdd from './components/ProductAdd'
@@ -15,6 +16,7 @@ import Register from './components/Register'
 // import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Nav2 from './components/Nav2'
+import MensProductList from './pages/MensProductList'
 
 function App() {
   React.useEffect(() => {
@@ -25,9 +27,26 @@ function App() {
     getData()
   })
 
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+    async function fetchProducts(){
+      const config = {
+        method: 'get',
+        url: 'http://127.0.0.1:8000/api/products/',
+        headers: {},
+        
+      }
+    
+      const response = await axios(config)
+      console.log(response.data)
+      setProducts(response.data)
+    }
+    fetchProducts()
+  }, [])
+
   function HomePage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    // const [allProducts, setAllProducts] = useState([])
+    
 
     useEffect(() => {
       if (getToken()) {
@@ -36,22 +55,6 @@ function App() {
         setIsLoggedIn(false)
       }
     }, [])
-
-    // useEffect(() => {
-    //   async function fetchProducts(){
-    //     const config = {
-    //       method: 'get',
-    //       url: 'http://127.0.0.1:8000/api/products/',
-    //       headers: {},
-          
-    //     }
-      
-    //     const response = await axios(config)
-    //     console.log(response.data)
-    //     setAllProducts(response.data)
-    //   }
-    //   fetchProducts()
-    // }, [])
 
     return (
       <>
@@ -85,7 +88,33 @@ function App() {
           <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </header>
         <main>
-          <ProductList />
+          <ProductList products={products}/>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    )
+  }
+
+  function MensProducts() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+      if (getToken()) {
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }, [])
+
+    return (
+      <>
+        <header>
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </header>
+        <main>
+          <MensProductList products={products}/>
         </main>
         <footer>
           <Footer />
@@ -256,7 +285,7 @@ function App() {
         <Route path="/products/addproduct" element={<AddOneProduct />} />
         <Route path="/products/:id/edit" element={<EditOneProduct />} />
         <Route path="/products/:id" element={<ShowOneProduct />} />
-        {/* <Route path="/products/mens" element={<Products />}/> */}
+        <Route path="/products/mens" element={<MensProducts />}/>
         <Route path="/products/" element={<Products />}/>
         <Route path="/login" element={<UserLogIn />} />
         <Route path="/register" element={<UserRegister />} />

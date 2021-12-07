@@ -21,7 +21,7 @@ class CategoryDetailView(APIView):
 
     def put(self, request, pk):
         cat = Category.objects.get(id=pk)
-        updated_cat = CategorySerializer(ord, data=request.data)
+        updated_cat = CategorySerializer(cat, data=request.data)
         if updated_cat.is_valid():
             updated_cat.save()
             return Response(updated_cat.data, status=status.HTTP_202_ACCEPTED)
@@ -30,12 +30,12 @@ class CategoryDetailView(APIView):
 
     def get(self, request, pk):
         cat = Category.objects.get(id=pk)
-        serialized_cat = PopulatedCategorySerializer(ord)
+        serialized_cat = PopulatedCategorySerializer(cat)
         return Response(serialized_cat.data, status=status.HTTP_200_OK)
 
 
 class CategoryListView(APIView):
-    # POST /order/
+    # POST /category/
     def post(self, request):
         cat = CategorySerializer(data=request.data)
         if cat.is_valid():
@@ -44,7 +44,7 @@ class CategoryListView(APIView):
         else:
             return Response(cat.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-    # GET /orders/
+    # GET /category/
     def get(self, request):
         categories = Category.objects.all()
         serialized_categories = PopulatedCategorySerializer(

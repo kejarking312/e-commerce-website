@@ -5,6 +5,7 @@
 @import "forms";
 @import "product-list";
 @import "product-show";
+@import "card";
 
 * {
   box-sizing: border-box;
@@ -45,15 +46,22 @@ body {
   text-align: center;
   font-size: 0.8rem;
   margin: 1%;
+  text-decoration: none;
   .link {
     text-decoration: none;
     color: $primary-text;
+  }
+  .link:hover {
+    text-decoration: none;
+    background-color: $primary-text;
+    color: $primary-background;
   }
 }
 .button:hover {
   background-color: $primary-text;
   border: 2px solid $primary-background;
   color: $primary-background;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 300px) and (max-height: 540px) {
