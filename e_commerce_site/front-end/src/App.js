@@ -17,6 +17,8 @@ import Register from './components/Register'
 import Footer from './components/Footer'
 import Nav2 from './components/Nav2'
 import MensProductList from './pages/MensProductList'
+import WomensProductList from './pages/WomensProductList'
+import KidsProductList from './pages/KidsProductList'
 
 function App() {
   React.useEffect(() => {
@@ -122,6 +124,59 @@ function App() {
       </>
     )
   }
+
+  function WomensProducts() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+      if (getToken()) {
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }, [])
+
+    return (
+      <>
+        <header>
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </header>
+        <main>
+          <WomensProductList products={products}/>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    )
+  }
+
+  function KidsProducts() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+      if (getToken()) {
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
+      }
+    }, [])
+
+    return (
+      <>
+        <header>
+          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </header>
+        <main>
+          <KidsProductList products={products}/>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    )
+  }
+
 
   function ShowOneProduct() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -286,6 +341,8 @@ function App() {
         <Route path="/products/:id/edit" element={<EditOneProduct />} />
         <Route path="/products/:id" element={<ShowOneProduct />} />
         <Route path="/products/mens" element={<MensProducts />}/>
+        <Route path="/products/womens" element={<WomensProducts />}/>
+        <Route path="/products/kids" element={<KidsProducts />}/>
         <Route path="/products/" element={<Products />}/>
         <Route path="/login" element={<UserLogIn />} />
         <Route path="/register" element={<UserRegister />} />

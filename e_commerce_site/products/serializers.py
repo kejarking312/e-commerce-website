@@ -7,11 +7,6 @@ from jwt_auth.serializers import SimpleUserSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    # category = serializers.SlugRelatedField(
-    #     slug_field='categorys',
-    #     queryset=Category.objects.all()
-    # )
-
     class Meta:
         model = Product
         fields = '__all__'

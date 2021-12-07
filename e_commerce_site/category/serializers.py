@@ -14,4 +14,4 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class PopulatedCategorySerializer(CategorySerializer):
-    products = ProductSerializer(read_only=True, many=True)
+    product_set = ProductSerializer(read_only=True, many=True)

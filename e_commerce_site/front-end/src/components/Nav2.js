@@ -30,8 +30,8 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
             <NavDropdown title="Clothing" id="basic-nav-dropdown" >
               <NavDropdown.Item href="/products">All Clothes</NavDropdown.Item>
               <NavDropdown.Item href="/products/mens">Mens</NavDropdown.Item>
-              <NavDropdown.Item href="/products">Womens</NavDropdown.Item>
-              <NavDropdown.Item href="/products">Kids</NavDropdown.Item>
+              <NavDropdown.Item href="/products/womens">Womens</NavDropdown.Item>
+              <NavDropdown.Item href="/products/kids">Kids</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/products">
                 SALE

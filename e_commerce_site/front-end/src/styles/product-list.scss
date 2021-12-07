@@ -33,6 +33,8 @@
       justify-content: space-evenly;
       width: 100%;
       .product {
+        display: flex;
+        flex-wrap: wrap;
         width: 100px;
         list-style: none;
         margin: 10px auto;

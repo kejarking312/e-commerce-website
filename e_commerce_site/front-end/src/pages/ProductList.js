@@ -44,10 +44,10 @@ const ProductList = () => {
     switch (type) {
       case 'AllProductList':
         return <AllProductList products={products} />
-      case 'MenProductList':
-        return <MensProductList products={products} />
+      case 'MensProductList':
+        return <MensProductList />
       case 'WomensProductList':
-        return <WomensProductList products={products} />
+        return <WomensProductList />
       case 'KidsProductList':
         return <KidsProductList products={products} />
       default:
@@ -58,6 +58,10 @@ const ProductList = () => {
   return (
     <div className="products-list-div">
       <div className="category-buttons">
+        <Button className="all-products-button button" onClick={() => setComponent('AllProductList')}>All Clothes</Button>
+        <Button className="mens-button button" onClick={() => setComponent('MensProductList')}>Mens Clothes</Button>
+        <Button className="womens-button button" onClick={() => setComponent('WomensProductList')}>Womens Clothes</Button>
+        <Button className="kids-button button" onClick={() => setComponent('KidsProductList')}>Kids Clothes</Button>
         <Button className="add-product-button button" variant="primary" onClick={handleShow}>
           Add Your Own Item
         </Button>
@@ -76,10 +80,7 @@ const ProductList = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Button className="all-products-button button" onClick={() => setComponent('AllProductList')}>All Clothes</Button>
-        <Button className="mens-button button" onClick={() => setComponent('MensProductList')}>Mens Clothes</Button>
-        <Button className="womens-button button" onClick={() => setComponent('WomensProductList')}>Womens Clothes</Button>
-        <Button className="kids-button button" onClick={() => setComponent('KidsProductList')}>Kids Clothes</Button>
+        
       </div>
       <div className="product-list-info">
         {renderInfo(component)}
