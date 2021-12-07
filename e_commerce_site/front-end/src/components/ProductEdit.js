@@ -6,7 +6,7 @@ import { getToken } from '../helpers/auth'
 import { fetchOneProduct } from '../helpers/api'
 import ProductForm from './ProductForm'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 
 const ProductEdit = () => {
   const [data, setData] = useState({
@@ -82,9 +82,6 @@ const ProductEdit = () => {
           <ProductForm formInputProps={formInputProps} />
           <div>
             <Form.Control type="submit" value="Edit" />
-          </div>
-          <div>
-            <Button className="button" onClick={() => navigate(-1)}>Go Back</Button>
           </div>
           {isError ? (
             <div className="error">

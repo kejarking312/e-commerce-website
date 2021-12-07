@@ -9,11 +9,7 @@ import MensProductList from './MensProductList'
 import WomensProductList from './WomensProductList'
 import KidsProductList from './KidsProductList'
 
-import { Button, Modal  } from 'react-bootstrap'
-
-// import MensProducts from '../components/info/MensProducts'
-// import WomensProducts from '../components/info/WomensProducts'
-// import KidsProducts from '../components/info/KidsProducts'
+import { Button, Modal } from 'react-bootstrap'
 
 const ProductList = () => {
   const [products, setProducts] = useState([])

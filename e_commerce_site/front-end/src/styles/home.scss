@@ -1,0 +1,87 @@
+@import "colours";
+
+.home-container-div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: $form-background;
+  .sale-div {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    border: 4px solid $form-text;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    color: $form-text;
+    background: $colour-splash;
+    align-content: center;
+    justify-content: center;
+  }
+  .home-links-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 85%;
+    width: 100%;
+    .mens-div {
+      display: flex;
+      flex-wrap: wrap;
+      width: 30%;
+      height: 100%;
+      border: 4px solid $primary-text;
+      margin: 1%;
+      background-image: url("https://i8.amplience.net/i/jpl/gifting-spots-552x823-mens-75fce5db4ed662cda1e1c3ebe04848aa?qlt=80&fmt=webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      justify-content: center;
+      align-items: flex-end;
+      .mens-link {
+        color: $primary-text;
+        text-decoration: none;
+        font-weight: bolder;
+        font-size: 1.5rem;
+      }
+    }
+    .womens-div {
+      display: flex;
+      flex-wrap: wrap;
+      width: 30%;
+      height: 100%;
+      border: 4px solid $primary-text;
+      margin: 1%;
+      background-image: url("https://i8.amplience.net/i/jpl/gifting-spots-552x823-womens-33dbb58d314e2303f4f56110e17d8178?qlt=80&fmt=webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      justify-content: center;
+      align-items: flex-end;
+      .womens-link {
+        color: $primary-text;
+        text-decoration: none;
+        font-weight: bolder;
+        font-size: 1.5rem;
+      }
+    }
+    .kids-div {
+      width: 30%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      border: 4px solid $primary-text;
+      margin: 1%;
+      background-image: url("https://i8.amplience.net/i/jpl/gifting-spots-552x823-kids-402bb401c9def0c71f043d26896ef90d?qlt=80&fmt=webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      justify-content: center;
+      align-items: flex-end;
+      .kids-link {
+        color: $primary-text;
+        text-decoration: none;
+        font-weight: bolder;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
