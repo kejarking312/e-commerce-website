@@ -54,30 +54,37 @@ const ProductList = () => {
   return (
     <div className="products-list-div">
       <div className="category-buttons">
-        <Button className="all-products-button button" onClick={() => setComponent('AllProductList')}>All Clothes</Button>
-        <Button className="mens-button button" onClick={() => setComponent('MensProductList')}>Mens Clothes</Button>
-        <Button className="womens-button button" onClick={() => setComponent('WomensProductList')}>Womens Clothes</Button>
-        <Button className="kids-button button" onClick={() => setComponent('KidsProductList')}>Kids Clothes</Button>
+        <Button className="all-products-button button" onClick={() => setComponent('AllProductList')}>
+          All Clothes
+        </Button>
+        <Button className="mens-button button" onClick={() => setComponent('MensProductList')}>
+          Mens Clothes
+        </Button>
+        <Button className="womens-button button" onClick={() => setComponent('WomensProductList')}>
+          Womens Clothes
+        </Button>
+        <Button className="kids-button button" onClick={() => setComponent('KidsProductList')}>
+          Kids Clothes
+        </Button>
         <Button className="add-product-button button" variant="primary" onClick={handleShow}>
           Add Your Own Item
         </Button>
-
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Your Item</Modal.Title>
-          </Modal.Header>
-          <Modal.Body><ProductAdd /></Modal.Body>
-          <Modal.Footer>
-            <Button className="button" variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button className="button" variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Your Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><ProductAdd /></Modal.Body>
+        <Modal.Footer>
+          <Button className="button" variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button className="button" variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>      
+      
       <div className="product-list-info">
         {renderInfo(component)}
       </div>

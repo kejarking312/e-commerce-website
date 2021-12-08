@@ -9,7 +9,8 @@ import login from '../styles/images/icons/user-add.png'
 import logout from '../styles/images/icons/user-delete.png'
 import signup from '../styles/images/icons/document-signed.png'
 import search from '../styles/images/icons/search-white.png'
-// import clothing from '../styles/images/icons/clothing.png'
+import orders from '../styles/images/icons/list.png'
+import account from '../styles/images/icons/user.png'
 
 const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate()
@@ -70,6 +71,8 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {isLoggedIn ? (
                   <>
+                    <Navbar.Text href="/orders"><img src={orders} alt="Orders" /> My Orders</Navbar.Text>
+                    <Navbar.Text href="/profile"><img src={account} alt="Account" /> Account Details</Navbar.Text>
                     <Navbar.Text onClick={handleLogout}><img src={logout} alt="Log Out" /> Log Out</Navbar.Text>
                   </>
                 ) : (

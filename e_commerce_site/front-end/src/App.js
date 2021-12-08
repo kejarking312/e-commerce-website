@@ -20,7 +20,7 @@ import MensProductList from './pages/MensProductList'
 import WomensProductList from './pages/WomensProductList'
 import KidsProductList from './pages/KidsProductList'
 
-function App() {
+function App(props) {
   React.useEffect(() => {
     const getData = async () => {
       const res = await axios.get('/api/products') 
@@ -28,6 +28,16 @@ function App() {
     }
     getData()
   })
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    if (getToken()) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
+    }
+  }, [])
 
   const [products, setProducts] = useState([])
   useEffect(() => {
@@ -45,310 +55,319 @@ function App() {
     }
     fetchProducts()
   }, [])
+  
 
-  function HomePage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function HomePage() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
     
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <Home />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <Home />
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function Products() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function Products() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <ProductList products={products}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <ProductList products={products}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function MensProducts() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function MensProducts() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <MensProductList products={products}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <MensProductList products={products}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function WomensProducts() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function WomensProducts() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <WomensProductList products={products}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <WomensProductList products={products}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function KidsProducts() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function KidsProducts() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <KidsProductList products={products}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <KidsProductList products={products}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
 
-  function ShowOneProduct() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function ShowOneProduct() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <ProductShow isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <ProductShow isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function AddOneProduct() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function AddOneProduct() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
     
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <ProductAdd />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <ProductAdd />
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function EditOneProduct() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function EditOneProduct() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
     
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <ProductEdit />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <ProductEdit />
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function NotFoundPage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function NotFoundPage() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <NotFound />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <NotFound />
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function UserLogIn(props) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function UserLogIn(props) {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
 
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <Login {...props} setIsLoggedIn={setIsLoggedIn}/>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <Login {...props} setIsLoggedIn={setIsLoggedIn}/>
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
-  function UserRegister() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // function UserRegister() {
+  //   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
-    useEffect(() => {
-      if (getToken()) {
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    }, [])
+  //   useEffect(() => {
+  //     if (getToken()) {
+  //       setIsLoggedIn(true)
+  //     } else {
+  //       setIsLoggedIn(false)
+  //     }
+  //   }, [])
   
-    return (
-      <>
-        <header>
-          <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </header>
-        <main>
-          <Register />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <header>
+  //         <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+  //       </header>
+  //       <main>
+  //         <Register />
+  //       </main>
+  //       <footer>
+  //         <Footer />
+  //       </footer>
+  //     </>
+  //   )
+  // }
 
   return (
     <>
-      <Routes>
-        <Route path="/products/addproduct" element={<AddOneProduct />} />
-        <Route path="/products/:id/edit" element={<EditOneProduct />} />
-        <Route path="/products/:id" element={<ShowOneProduct />} />
-        <Route path="/products/mens" element={<MensProducts />}/>
-        <Route path="/products/womens" element={<WomensProducts />}/>
-        <Route path="/products/kids" element={<KidsProducts />}/>
-        <Route path="/products/" element={<Products />}/>
-        <Route path="/login" element={<UserLogIn />} />
-        <Route path="/register" element={<UserRegister />} />
-        <Route index element={<HomePage />} />
-        <Route element={<NotFoundPage />} />
-      </Routes>
+      <header>
+        <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/products/addproduct" element={<ProductAdd />} />
+          <Route path="/products/:id/edit" element={<ProductEdit />} />
+          <Route path="/products/:id" element={<ProductShow isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/products/mens" element={<MensProductList />}/>
+          <Route path="/products/womens" element={<WomensProductList />}/>
+          <Route path="/products/kids" element={<KidsProductList />}/>
+          <Route path="/products/" element={<ProductList products={products} />} />
+          <Route path="/login" element={<Login {...props} setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path="/register" element={<Register />} />
+          <Route index element={<Home />} />
+          <Route element={<NotFound />} />
+        </Routes>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   )
 }
