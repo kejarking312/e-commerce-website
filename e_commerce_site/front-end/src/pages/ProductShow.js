@@ -6,10 +6,13 @@ import { useParams, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { deleteMovie } from '../helpers/api'
 import { Button, Modal } from 'react-bootstrap'
+import { setToken } from '../helpers/auth'
 import Carousel from 'react-bootstrap/Carousel'
+import FormInput from '../components/FormInput'
+import Form from 'react-bootstrap/Form'
 
 import ProductEdit from '../components/ProductEdit'
-import Login from '../components/Login'
+// import Login from '../components/Login'
 import Register from '../components/Register'
 
 import login from '../styles/images/icons/user-add.png'
@@ -18,12 +21,19 @@ import addtocart from '../styles/images/icons/shopping-cart-add-black.png'
 import favourite from '../styles/images/icons/heart-black.png'
 
 
-const ProductShow = ({ isLoggedIn }) => {
+const ProductShow = ({ isLoggedIn, setIsLoggedIn }) => {
   const [products, setProducts] = useState([])
   const { id } = useParams()
   const [show, setShow] = useState(false)
   const [showLogIn, setShowLogIn] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
+
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  })
+  const [errorInfo, setErrorInfo] = useState({})
+  const [isError, setIsError] = useState(false)
 
   const handleClose = () => setShow(false)
   const handleLogInClose = () => setShowLogIn(false)
@@ -60,6 +70,49 @@ const ProductShow = ({ isLoggedIn }) => {
         alert(err)
       })
   }
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+        
+    const config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/auth/login/',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
+    
+    try {
+      const response = await axios(config).catch(handleError)
+      console.log(response.data.token)
+      setToken(response.data.token)
+      setIsLoggedIn(true)
+      setIsError(false)
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+      setIsError(true)
+    }
+  }
+
+  const handleError = (error) => {
+    if (error.response) {
+      setErrorInfo(error.response.data)
+      setIsError(true)
+    }
+  }
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target
+    setData({
+      ...data,
+      [name]: value,
+    })
+  }
+
+  const formInputProps = { data, errorInfo, handleFormChange }
 
   return (
     <div className="product-show-div">
@@ -145,10 +198,36 @@ const ProductShow = ({ isLoggedIn }) => {
                 <Modal.Header closeButton>
                   <Modal.Title>Log In</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><Login /></Modal.Body>
+                <Modal.Body>
+                  <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <FormInput 
+                        placeholder="email@email.com" 
+                        type='text'
+                        name='email' 
+                        {...formInputProps}  />
+                      <FormInput 
+                        placeholder='password' 
+                        type='password'
+                        name='password' 
+                        {...formInputProps} />
+                      <Form.Control type='submit' value='login' />
+                      {isError ? (
+                        <div className='error'>
+                          <p>Error. Please try again.</p>
+                        </div> 
+                      ) : (
+                        <></>
+                      )}
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
                 <Modal.Footer>
                   <Button className="button" variant="secondary" onClick={handleLogInClose}>
                     Close
+                  </Button>
+                  <Button className="button" variant="primary" onSubmit={handleSubmit}>
+                    Log In
                   </Button>
                 </Modal.Footer>
               </Modal>

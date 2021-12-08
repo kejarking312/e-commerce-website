@@ -12,7 +12,7 @@ from .models import (
     Order,
     OrderItem
 )
-from .serializers import ProductSerializer
+from .serializers import OrderItemSerializer, ProductSerializer, OrderSerializer
 from .serializers import PopulatedProductSerializer
 
 
@@ -76,59 +76,95 @@ class ProductDetailView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-def add_to_cart(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    order_item, created = OrderItem.objects.get_or_create(
-        item=product,
-        user=request.user,
-        ordered=False
-    )
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
+class CartView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
-    if order_qs.exists():
-        order = order_qs[0]
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        print(request.user)
+        order_item, created = OrderItem.objects.get_or_create(
+            product=product,
+            user=request.user,
+            ordered=False
+        )
+        order_qs = Order.objects.filter(
+            user=request.user, ordered=False).values()
 
-        if order.items.filter(product__pk=product.pk).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "Added quantity Item")
-            return redirect("core:product", pk=pk)
+        if order_qs.exists():
+            order = order_qs[0]
+
+            if order.items.filter(product__pk=product.pk).exists():
+                order_item.quantity += 1
+                order_item.save()
+                messages.info(request, "Added quantity Item(s)")
+                serialized_orders = OrderItemSerializer(
+                    order_item, many=True)
+                return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                order.items.add(order_item)
+                messages.info(request, "Item added to your cart")
+                return redirect("e_commerce_site:product", pk=pk)
         else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(
+                user=request.user, ordered_date=ordered_date)
             order.items.add(order_item)
             messages.info(request, "Item added to your cart")
-            return redirect("core:product", pk=pk)
-    else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(
-            user=request.user, ordered_date=ordered_date)
-        order.items.add(order_item)
-        messages.info(request, "Item added to your cart")
-        return redirect("core:product", pk=pk)
+            return redirect("e_commerce_site:product", pk=pk)
 
 
-def remove_from_cart(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        ordered=False
-    )
-    if order_qs.exists():
-        order = order_qs[0]
-        if order.items.filter(product__pk=product.pk).exists():
-            order_item = OrderItem.objects.filter(
-                item=product,
-                user=request.user,
-                ordered=False
-            )[0]
-            order.items.remove(order_item)
-            messages.info(request, "Item remove from your cart")
-            return redirect("core:product", pk=pk)
+class CartItemView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
+    def delete(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        order_qs = Order.objects.filter(
+            user=request.user,
+            ordered=False
+        )
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.items.filter(product__pk=product.pk).exists():
+                order_item = OrderItem.objects.filter(
+                    item=product,
+                    user=request.user,
+                    ordered=False
+                )[0]
+                order.items.remove(order_item)
+                messages.info(request, "Item remove from your cart")
+                return redirect("e_commerce_site:product", pk=pk)
+            else:
+                messages.info(request, "This Item not in your cart")
+                return redirect("e_commerce_site:product", pk=pk)
         else:
-            messages.info(request, "This Item not in your cart")
-            return redirect("core:product", pk=pk)
-    else:
-        messages.info(request, "You do not have an Order")
-        return redirect("core:product", pk=pk)
+            messages.info(request, "You do not have an Order")
+            return redirect("e_commerce_site:product", pk=pk)
+
+
+class OrderListView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    # # POST product
+
+    # def post(self, request):
+    #     try:
+    #         prod = ProductSerializer(data=request.data)
+    #         if prod.is_valid():
+    #             prod.save(owner=request.user)
+    #             return Response(prod.data, status=status.HTTP_201_CREATED)
+    #         else:
+    #             return Response(prod.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+    #     except Exception as e:
+    #         return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+
+    # GET Orders
+    def get(self, request):
+        try:
+            orders = Order.objects.all()
+            serialized_orders = OrderSerializer(
+                orders, many=True)
+            return Response(serialized_orders.data, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 def home(request):

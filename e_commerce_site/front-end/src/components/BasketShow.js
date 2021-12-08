@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BasketList from './BasketList'
+import Basket from './Basket'
 import BasketInput from './BasketInput'
 
 
@@ -19,16 +19,16 @@ const BasketShow = () => {
   }
 
   return (
-    <div className="shopping-list">
+    <div className="basket">
       <header>
         <div className="container">
-          <h3 className="header-title">Shopping List Generator</h3>
+          <h3 className="header-title">Basket</h3>
         </div>
       </header>
       <div className="container main">
         <BasketInput addItem={addItem} addQuantity={addQuantity} />
         <div className="list-results">
-          <BasketList
+          <Basket
             items={items}
             removeItem={removeItem}
             quantities={quantities}

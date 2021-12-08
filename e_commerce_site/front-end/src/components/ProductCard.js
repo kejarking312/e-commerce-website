@@ -31,7 +31,7 @@ const ProductCard = ({ id, brand, type, image_1, price }) => {
           <Link className="link" to={`/products/${id}/`} >More Info</Link>
         </Button>
         <Button className="button"><Link className="link" to={`/products/${id}/`}><img src={favourite} alt="Save to Favourites" /></Link></Button>
-        <Button className="button"><Link className="link" to={`/products/${id}/`}><img src={addtocart} alt="Add to Basket" /></Link></Button>
+        <Button className="button"><Link className="link" to={'/basket'}><img src={addtocart} alt="Add to Basket" /></Link></Button>
       </Card.Body>
     </Card>
   )

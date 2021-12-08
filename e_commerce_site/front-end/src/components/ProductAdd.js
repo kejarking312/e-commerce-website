@@ -12,13 +12,18 @@ const ProductAdd = () => {
   const [data, setData] = useState(
     {
       brand: '',
+      product_model: '',
       type: '',
       colour: '',
       size: '',
       price: '',
+      discount_price: '',
+      label: '',
       categorys: '',
       description: '',
-      image: '',
+      image_1: '',
+      image_2: '',
+      image_3: '',
     })
 
   const [errorInfo, setErrorInfo] = useState({})

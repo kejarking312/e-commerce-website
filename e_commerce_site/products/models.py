@@ -50,18 +50,23 @@ class Product(models.Model):
         return f"{self.brand} {self.type}"
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs={
+        return reverse("e_commerce_site:product", kwargs={
             "pk": self.pk
 
         })
 
+    # def get_add_to_cart_url(self):
+    #     return reverse("core:add-to-cart", kwargs={
+    #         "pk": self.pk
+    #     })
+
     def get_add_to_cart_url(self):
-        return reverse("core:add-to-cart", kwargs={
+        return reverse("e_commerce_site:add-to-cart", kwargs={
             "pk": self.pk
         })
 
     def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs={
+        return reverse("e_commerce_:remove-from-cart", kwargs={
             "pk": self.pk
         })
 

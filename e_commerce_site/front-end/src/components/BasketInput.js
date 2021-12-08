@@ -22,14 +22,14 @@ const BasketInput = ({ addItem, addQuantity }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="foods">
+      <div className="products">
         <label htmlFor="item">Item</label>
         <input
           className="sub-input"
           id="item"
           value={item}
           type="text"
-          placeholder="e.g. Pint of milk"
+          placeholder="e.g. add Item"
           onChange={handleItemChange}
         />
       </div>
