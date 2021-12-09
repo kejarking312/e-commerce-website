@@ -18,6 +18,7 @@ import MensProductList from './pages/MensProductList'
 import WomensProductList from './pages/WomensProductList'
 import KidsProductList from './pages/KidsProductList'
 import BasketShow from './components/BasketShow'
+import Orders from './pages/Orders'
 
 function App(props) {
   React.useEffect(() => {
@@ -69,6 +70,7 @@ function App(props) {
           <Route path="/products/womens" element={<WomensProductList />}/>
           <Route path="/products/kids" element={<KidsProductList />}/>
           <Route path="/products/" element={<ProductList products={products} />} />
+          <Route path="/products/orders" element={<Orders isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/basket" element={<BasketShow />} />
           <Route path="/login" element={<Login {...props} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/register" element={<Register />} />

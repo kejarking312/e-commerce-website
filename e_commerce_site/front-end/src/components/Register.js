@@ -30,7 +30,7 @@ const Register = () => {
     
     const config = {
       method: 'post',
-      url: 'http://localhost:8000/api/auth/login/',
+      url: 'http://localhost:8000/api/auth/register/',
       headers: { 
         'Content-Type': 'application/json',
       },

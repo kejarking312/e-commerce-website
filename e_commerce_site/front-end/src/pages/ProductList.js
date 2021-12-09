@@ -55,7 +55,6 @@ const ProductList = () => {
         method: 'get',
         url: 'http://127.0.0.1:8000/api/products/',
         headers: {},
-        
       }
     
       const response = await axios(config)
@@ -67,8 +66,6 @@ const ProductList = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('data', data)
-    console.log(getToken())
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/products/',
@@ -160,7 +157,7 @@ const ProductList = () => {
         </Modal.Footer>
       </Modal>      
       
-      <div className="product-list-info">
+      <div className="component-div">
         {renderInfo(component)}
       </div>
     </div>

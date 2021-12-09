@@ -60,7 +60,7 @@ class ProductDetailView(APIView):
             prod = Product.objects.get(id=pk)
             updated_prod = ProductSerializer(prod, data=request.data)
             if updated_prod.is_valid():
-                updated_prod.save()
+                updated_prod.save(owner=request.user)
                 return Response(updated_prod.data, status=status.HTTP_202_ACCEPTED)
             else:
                 return Response(updated_prod.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)

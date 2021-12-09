@@ -71,7 +71,7 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {isLoggedIn ? (
                   <>
-                    <Navbar.Text href="/orders"><img src={orders} alt="Orders" /> My Orders</Navbar.Text>
+                    <Nav.Link href="/products/orders"><img src={orders} alt="Orders" /> My Orders</Nav.Link>
                     <Navbar.Text href="/profile"><img src={account} alt="Account" /> Account Details</Navbar.Text>
                     <Navbar.Text onClick={handleLogout}><img src={logout} alt="Log Out" /> Log Out</Navbar.Text>
                   </>

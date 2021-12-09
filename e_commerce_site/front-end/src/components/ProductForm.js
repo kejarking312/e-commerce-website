@@ -6,10 +6,6 @@ import Form from 'react-bootstrap/Form'
 const ProductForm = ({ formInputProps }) => {
   const handleFormChange = formInputProps.handleFormChange
 
-  // const state = { 
-  //   templateId: '1',
-  // }
-
   return (
     <>
       <Form.Control
@@ -44,19 +40,19 @@ const ProductForm = ({ formInputProps }) => {
         {...formInputProps} >
         <option value="">Choose Your Size</option>
         <option value="L">Large</option>
-        <option value="Medium">Medium</option>
-        <option value="Small">Small</option>
-        <option value="12">12</option>
-        <option value="10">10</option>
-        <option value="8">8</option>
-        <option value="Size 4">Size 4</option>
-        <option value="Size 5">Size 5</option>
-        <option value="Size 6">Size 6</option>
-        <option value="Size 7">Size 7</option>
-        <option value="Size 8">Size 8</option>
-        <option value="size 9">Size 9</option>
-        <option value="Size 10">Size 10</option>
-        <option value="size 11">Size 11</option>
+        <option value="M">Medium</option>
+        <option value="S">Small</option>
+        <option value="WL">12</option>
+        <option value="WM">10</option>
+        <option value="WS">8</option>
+        <option value="4">Size 4</option>
+        <option value="5">Size 5</option>
+        <option value="6">Size 6</option>
+        <option value="7">Size 7</option>
+        <option value="8">Size 8</option>
+        <option value="9">Size 9</option>
+        <option value="10">Size 10</option>
+        <option value="11">Size 11</option>
       </Form.Select>
       <Form.Control
         name='price'
@@ -79,8 +75,8 @@ const ProductForm = ({ formInputProps }) => {
         {...formInputProps} >
         <option value="">Choose Your Label</option>
         <option value="N">New</option>
-        <option value="Best Seller">Best Seller</option>
-        <option value="Sale Item">Sale Item</option>
+        <option value="BS">Best Seller</option>
+        <option value="S">Sale Item</option>
       </Form.Select>
       <Form.Select
         name='categorys'
