@@ -1,7 +1,7 @@
-@import "colours";
+@import 'colours';
 
 .product-card {
-  padding: 0.8rem;
+  // padding: 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,14 +11,14 @@
   margin: 1%;
   font-size: 1.5rem;
   font-weight: bolder;
+  width: 100%;
   .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 85%;
+    height: 80%;
     width: 100%;
-    padding: 0%;
     .card-title {
       text-align: center;
       color: $primary-background;
@@ -67,10 +67,24 @@
     }
   }
   .card-buttons {
+    // display: flex;
+    // flex-wrap: wrap;
+    // width: 100%;
+    // justify-content: center;
+    // height: 15%;
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    height: 10%;
+    height: 15%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 70%;
+    padding: 1%;
+    gap: 2%;
+    .button {
+      height: 80%;
+      width: 30%;
+      flex-wrap: wrap;
+      margin: auto;
+    }
   }
 }

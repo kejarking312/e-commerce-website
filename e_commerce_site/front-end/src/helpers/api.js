@@ -21,7 +21,7 @@ export const fetchOneProduct = async (id) => {
   return response.data
 }
 
-export const deleteMovie = async (id) => {
+export const deleteProduct = async (id) => {
   const config = {
     method: 'delete',
     url: `http://127.0.0.1:8000/api/products/${id}`,
@@ -32,7 +32,6 @@ export const deleteMovie = async (id) => {
   const response = await axios(config)
   return response.data
 }
-
 
 const makeAxiosRequest = async (url, data) => {
   const config = getAxiosRequestConfig(url, data)
@@ -49,13 +48,12 @@ export const register = (data) => {
   return makeAxiosRequest('/register', data)
 }
 
-
 export const getAxiosRequestConfig = (requestUrl, data, method = 'post') => {
   const config = {
     method,
     url: `/api${requestUrl}`,
     headers: {
-      Authorization: `${getToken()}`, 
+      Authorization: `${getToken()}`,
       'Content-Type': 'application/json',
     },
     data,

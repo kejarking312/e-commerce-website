@@ -1,27 +1,25 @@
 import React from 'react'
 import axios from 'axios'
-// import ProductCard from '../components/ProductCard'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { deleteMovie } from '../helpers/api'
+import { deleteProduct } from '../helpers/api'
 import { Button, Modal } from 'react-bootstrap'
 import { setToken } from '../helpers/auth'
 import { getToken } from '../helpers/auth'
+
 import EditProduct from '../components/modals/EditProduct'
-// import { fetchOneProduct } from '../helpers/api'
+
 import Carousel from 'react-bootstrap/Carousel'
 import FormInput from '../components/FormInput'
 import Form from 'react-bootstrap/Form'
-
-// import Register from '../components/Register'
 
 import login from '../styles/images/icons/user-add.png'
 import signup from '../styles/images/icons/document-signed.png'
 import addtocart from '../styles/images/icons/shopping-cart-add-black.png'
 import favourite from '../styles/images/icons/heart-black.png'
 
-const ProductShow = ({ isLoggedIn, setIsLoggedIn }) => {
+const ProductShow = ({ isLoggedIn, setIsLoggedIn, products, setProducts }) => {
   const [product, setProduct] = useState({})
   const [loginData, setLoginData] = useState({})
   const [registerData, setRegisterData] = useState({})
@@ -78,19 +76,18 @@ const ProductShow = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     try {
       const response = await axios(config).catch(handleError)
-
       console.log(response.data)
       setIsError(false)
-      // navigate(`/products/${response.data._id}`)
     } catch (err) {
       console.log(err)
     }
   }
 
   const handleDeleteClick = () => {
-    deleteMovie(id)
+    deleteProduct(id)
       .then((data) => {
         console.log(data)
+        setProducts(products)
         navigate('/products')
       })
       .catch((err) => {
