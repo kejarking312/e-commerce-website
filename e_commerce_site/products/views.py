@@ -91,31 +91,23 @@ class CartView(APIView):
         order, _ = Order.objects.get_or_create(
             user=request.user, ordered=False)
 
-        if True:
-            # order = order_qs[0]
-            print(order.items)
+        # order = order_qs[0]
+        print(order.items)
 
-            if not created:
-                order_item.quantity += 1
-                order_item.save()
-                messages.info(request, "Added quantity Item(s)")
+        if not created:
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Added quantity Item(s)")
 
-            else:
-                order_item.quantity = 1
-                order_item.save()
-                messages.info(request, "Item added to your cart")
-            order.items.add(order_item)
-            order.save()
-            serialized_orders = OrderSerializer(
-                order)
-            return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
         else:
-            ordered_date = timezone.now()
-            order = Order.objects.create(
-                user=request.user, ordered_date=ordered_date)
-            order.items.add(order_item)
+            order_item.quantity = 1
+            order_item.save()
             messages.info(request, "Item added to your cart")
-            return redirect("e_commerce_site:product", pk=pk)
+        order.items.add(order_item)
+        order.save()
+        serialized_orders = OrderSerializer(
+            order)
+        return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
 
 
 class CartItemView(APIView):
@@ -123,27 +115,26 @@ class CartItemView(APIView):
 
     def delete(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
-        order_qs = Order.objects.filter(
+        order, _ = Order.objects.get_or_create(
+            user=request.user, ordered=False)
+
+        order_item, created = OrderItem.objects.get_or_create(
+            product=product,
             user=request.user,
             ordered=False
         )
-        if order_qs.exists():
-            order = order_qs[0]
-            if order.items.filter(product__pk=product.pk).exists():
-                order_item = OrderItem.objects.filter(
-                    item=product,
-                    user=request.user,
-                    ordered=False
-                )[0]
-                order.items.remove(order_item)
-                messages.info(request, "Item remove from your cart")
-                return redirect("e_commerce_site:product", pk=pk)
-            else:
-                messages.info(request, "This Item not in your cart")
-                return redirect("e_commerce_site:product", pk=pk)
+        if created:
+            return Response("This item is not in Cart", status=status.HTTP_404_NOT_FOUND)
         else:
-            messages.info(request, "You do not have an Order")
-            return redirect("e_commerce_site:product", pk=pk)
+            if order_item.quantity <= 1:
+                order_item.delete()
+            else:
+                order_item.quantity -= 1
+                order_item.save()
+            order.save()
+            serialized_orders = PopulatedOrderSerializer(
+                order)
+            return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
 
 
 class OrderListView(APIView):

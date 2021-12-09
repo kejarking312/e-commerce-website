@@ -9,26 +9,25 @@ import { getToken } from '../helpers/auth'
 import ProductForm from './ProductForm'
 
 const ProductAdd = () => {
-  const [data, setData] = useState(
-    {
-      brand: '',
-      product_model: '',
-      type: '',
-      colour: '',
-      size: '',
-      price: '',
-      discount_price: '',
-      label: '',
-      categorys: '',
-      description: '',
-      image_1: '',
-      image_2: '',
-      image_3: '',
-    })
+  const [data, setData] = useState({
+    brand: '',
+    product_model: '',
+    type: '',
+    colour: '',
+    size: '',
+    price: '',
+    discount_price: '',
+    label: '',
+    categorys: '',
+    description: '',
+    image_1: '',
+    image_2: '',
+    image_3: '',
+  })
 
   const [errorInfo, setErrorInfo] = useState({})
-  const [isError, setIsError] = useState(false) 
-  
+  const [isError, setIsError] = useState(false)
+
   const navigate = useNavigate()
 
   const handleError = (error) => {
@@ -43,13 +42,12 @@ const ProductAdd = () => {
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/products/',
-      headers: { 
-        Authorization: `Bearer ${getToken()}`, 
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
         'Content-Type': 'application/json',
       },
       data: data,
     }
-    
 
     try {
       const response = await axios(config).catch(handleError)
@@ -69,14 +67,18 @@ const ProductAdd = () => {
     })
   }
 
-  const formInputProps = { data, errorInfo, handleFormChange }
-  
+  // const formInputProps = { data, errorInfo, handleFormChange }
+
   return (
     <div className="form-section">
       <div className="form-box">
         <h1>Add your Item</h1>
         <Form onSubmit={handleSubmit} className="form">
-          <ProductForm formInputProps={formInputProps} />
+          <ProductForm
+            data={data}
+            errorInfo={errorInfo}
+            handleFormChange={handleFormChange}
+          />
           <div>
             <Form.Control id="submit-button" type="submit" value="Add Item" />
           </div>

@@ -4,7 +4,7 @@ import FormInput from './FormInput'
 
 const ProductForm = ({ ...formInputProps }) => {
   const handleFormChange = formInputProps.handleFormChange
-  console.log('forminputprops', formInputProps.data)
+  console.log('forminputprops', formInputProps)
 
   return (
     <>
