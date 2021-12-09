@@ -3,16 +3,18 @@ import * as React from 'react'
 import { removeToken } from '../helpers/auth'
 import { useNavigate } from 'react-router-dom'
 // import Nav from 'react-bootstrap/Nav'
-import { Navbar, Container, NavDropdown, Nav, Form, FormControl, Offcanvas, Button  } from 'react-bootstrap'
+import { Navbar, Container, NavDropdown, Nav, Form, Offcanvas  } from 'react-bootstrap'
 import home from '../styles/images/icons/home-white-24px.png'
 import login from '../styles/images/icons/user-add.png'
 import logout from '../styles/images/icons/user-delete.png'
 import signup from '../styles/images/icons/document-signed.png'
-import search from '../styles/images/icons/search-white.png'
+// import search from '../styles/images/icons/search-white.png'
 import orders from '../styles/images/icons/list.png'
 import account from '../styles/images/icons/user.png'
 
-const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
+import Search from './Search'
+
+const Nav2 = ({ isLoggedIn, setIsLoggedIn, productsData, setProducts }) => {
   const navigate = useNavigate()
   
   const handleLogout = () => {
@@ -27,36 +29,39 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
         <Container fluid>
           <Navbar.Brand href="/">E-Commerce App</Navbar.Brand>
           <Nav className="me-auto" >
-            <Nav.Link href="/"><img src={home} alt="Home" /></Nav.Link>
-            <NavDropdown title="Clothing" id="basic-nav-dropdown" >
-              <NavDropdown.Item href="/products">All Clothes</NavDropdown.Item>
-              <NavDropdown.Item href="/products/mens">Mens</NavDropdown.Item>
-              <NavDropdown.Item href="/products/womens">Womens</NavDropdown.Item>
-              <NavDropdown.Item href="/products/kids">Kids</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/products">
-                SALE
-              </NavDropdown.Item>
-              {isLoggedIn ? (
-                <>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/products/addproduct">
-                  Add your own item
-                  </NavDropdown.Item>
-                </>
-              ) : (
-                <></>
-              )}            
-            </NavDropdown>
+            <div className="home-drop-container">
+              <Nav.Link href="/"><img src={home} alt="Home" /></Nav.Link>
+              <NavDropdown title="Clothing" id="basic-nav-dropdown" >
+                <NavDropdown.Item href="/products/">All Clothes</NavDropdown.Item>
+                <NavDropdown.Item href="/products/mens">Mens</NavDropdown.Item>
+                <NavDropdown.Item href="/products/womens">Womens</NavDropdown.Item>
+                <NavDropdown.Item href="/products/kids">Kids</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/products/">
+                  SALE
+                </NavDropdown.Item>
+                {isLoggedIn ? (
+                  <>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="/products/addproduct">
+                    Add your own item
+                    </NavDropdown.Item>
+                  </>
+                ) : (
+                  <></>
+                )}            
+              </NavDropdown>
+            </div>
           </Nav>
           <Form className="d-flex">
-            <FormControl
+            {/* <FormControl
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-            />
-            <Button variant="outline-success"><img src={search} alt="Search" /></Button>
+            /> */}
+            <Search productsData={productsData} setProducts={setProducts} />
+            {/* <Button variant="outline-success"><img src={search} alt="Search" /></Button> */}
           </Form>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Offcanvas
@@ -71,7 +76,7 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn }) => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {isLoggedIn ? (
                   <>
-                    <Nav.Link href="/products/orders"><img src={orders} alt="Orders" /> My Orders</Nav.Link>
+                    <Nav.Link className="link" href="/products/orders"><img src={orders} alt="Orders" /> My Orders</Nav.Link>
                     <Navbar.Text href="/profile"><img src={account} alt="Account" /> Account Details</Navbar.Text>
                     <Navbar.Text onClick={handleLogout}><img src={logout} alt="Log Out" /> Log Out</Navbar.Text>
                   </>

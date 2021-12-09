@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <div className="home-container-div">
-      <div className="sale-div">SALE NOW ON</div>
+      <marquee className="sale-div" width="100%" direction="left" height="50px">SALE NOW ON</marquee>
       <div className="home-links-div">
         <div className="mens-div">
           <Link className="mens-link" to='/products/mens'>Shop Mens</Link>

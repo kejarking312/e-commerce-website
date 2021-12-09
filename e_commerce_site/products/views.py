@@ -12,7 +12,7 @@ from .models import (
     Order,
     OrderItem
 )
-from .serializers import OrderItemSerializer, ProductSerializer, OrderSerializer
+from .serializers import OrderItemSerializer, ProductSerializer, OrderSerializer, PopulatedOrderSerializer
 from .serializers import PopulatedProductSerializer
 
 
@@ -58,6 +58,7 @@ class ProductDetailView(APIView):
     def put(self, request, pk):
         try:
             prod = Product.objects.get(id=pk)
+            request.data['owner'] = request.user.id
             updated_prod = ProductSerializer(prod, data=request.data)
             if updated_prod.is_valid():
                 updated_prod.save(owner=request.user)
@@ -87,23 +88,27 @@ class CartView(APIView):
             user=request.user,
             ordered=False
         )
-        order_qs = Order.objects.filter(
-            user=request.user, ordered=False).values()
+        order, _ = Order.objects.get_or_create(
+            user=request.user, ordered=False)
 
-        if order_qs.exists():
-            order = order_qs[0]
+        if True:
+            # order = order_qs[0]
+            print(order.items)
 
-            if order.items.filter(product__pk=product.pk).exists():
+            if not created:
                 order_item.quantity += 1
                 order_item.save()
                 messages.info(request, "Added quantity Item(s)")
-                serialized_orders = OrderItemSerializer(
-                    order_item, many=True)
-                return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
+
             else:
-                order.items.add(order_item)
+                order_item.quantity = 1
+                order_item.save()
                 messages.info(request, "Item added to your cart")
-                return redirect("e_commerce_site:product", pk=pk)
+            order.items.add(order_item)
+            order.save()
+            serialized_orders = OrderSerializer(
+                order)
+            return Response(serialized_orders.data, status=status.HTTP_202_ACCEPTED)
         else:
             ordered_date = timezone.now()
             order = Order.objects.create(
@@ -160,11 +165,11 @@ class OrderListView(APIView):
     def get(self, request):
         try:
             orders = Order.objects.all()
-            serialized_orders = OrderSerializer(
+            serialized_orders = PopulatedOrderSerializer(
                 orders, many=True)
             return Response(serialized_orders.data, status=status.HTTP_200_OK)
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
 
 def home(request):

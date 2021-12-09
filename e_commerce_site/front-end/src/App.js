@@ -30,7 +30,7 @@ function App(props) {
   })
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+  
   useEffect(() => {
     if (getToken()) {
       setIsLoggedIn(true)
@@ -39,7 +39,9 @@ function App(props) {
     }
   }, [])
 
+  const [productsData, setProductsData] = useState([])
   const [products, setProducts] = useState([])
+  console.log(products)
   useEffect(() => {
     async function fetchProducts(){
       const config = {
@@ -52,6 +54,7 @@ function App(props) {
       const response = await axios(config)
       console.log(response.data)
       setProducts(response.data)
+      setProductsData(response.data)
     }
     fetchProducts()
   }, [])
@@ -59,7 +62,7 @@ function App(props) {
   return (
     <>
       <header>
-        <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Nav2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} productsData={productsData} setProducts={setProducts} />
       </header>
       <main>
         <Routes>

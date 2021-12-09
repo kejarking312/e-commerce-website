@@ -28,23 +28,24 @@
     }
   }
   .component-div {
-    .product-list-div {
+    .products-list-div {
       padding: 0;
       height: 85%;
       width: 100%;
       overflow: scroll;
       background-color: $form-background;
-      .product-list {
+      .products-list {
         margin: 0 auto;
         padding: 5px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
         width: 100%;
+        text-decoration: none;
         .product {
           display: flex;
           flex-wrap: wrap;
-          width: 100px;
+          width: 400px;
           list-style: none;
           margin: 10px auto;
           border: 3px solid $primary-text;
@@ -54,4 +55,40 @@
       }
     }
   }
+}
+.products-list-div {
+  padding: 0;
+  height: 85%;
+  width: 100%;
+  overflow: scroll;
+  background-color: $form-background;
+}
+
+.products-list {
+  margin: 0 auto;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  text-decoration: none;
+}
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  width: 30%;
+  list-style: none;
+  margin: 10px auto;
+  border: 3px solid $primary-text;
+  border-radius: 10px;
+  box-shadow: 10px 10px $secondary-text;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 10%;
 }

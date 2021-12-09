@@ -40,8 +40,6 @@ const ProductAdd = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('data', data)
-    console.log(getToken())
     const config = {
       method: 'post',
       url: 'http://localhost:8000/api/products/',

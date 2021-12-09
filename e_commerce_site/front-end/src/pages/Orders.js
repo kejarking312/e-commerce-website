@@ -6,7 +6,7 @@ import OrderCard from '../components/OrderCard'
 
 const Orders = () => {
 
-  const [orders, setOrderss] = useState([])
+  const [orders, setOrders] = useState([])
 
   useEffect(() => {
     async function fetchOrders(){
@@ -22,7 +22,7 @@ const Orders = () => {
     
       const response = await axios(config)
       console.log(response.data)
-      setOrderss(response.data)
+      setOrders(response.data)
     }
     fetchOrders()
   }, [])

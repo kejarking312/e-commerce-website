@@ -27,7 +27,7 @@ const KidsProductList = () => {
     <div className="products-list-div">
       <ul className="products-list">
         {kidsProducts.map((p) => (
-          <li key={p._id}>
+          <li className="product" key={p._id}>
             <ProductCard {...p} />
           </li>
         ))}

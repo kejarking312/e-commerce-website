@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard'
 
 const AllProductList = ({ products }) => {
 
-  console.log('products', products)
+  // console.log('products', products)
 
   // const [products, setProducts] = useState([])
 

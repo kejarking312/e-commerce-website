@@ -20,10 +20,18 @@ class PopulatedProductSerializer(ProductSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ('product', 'quantity', 'id', 'ordered')
+
+
+class PopulatedOrderItemSerializer(OrderItemSerializer):
+    product = PopulatedProductSerializer()
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+
+class PopulatedOrderSerializer(OrderSerializer):
+    items = PopulatedOrderItemSerializer(many=True)

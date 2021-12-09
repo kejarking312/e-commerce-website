@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getToken } from '../helpers/auth'
@@ -13,7 +13,8 @@ import KidsProductList from './KidsProductList'
 
 import { Button, Modal } from 'react-bootstrap'
 
-const ProductList = () => {
+const ProductList = ({ products }) => {
+  console.log('products-in-product-list', products)
   const [data, setData] = useState(
     {
       brand: '',
@@ -31,7 +32,7 @@ const ProductList = () => {
       image_3: '',
     })
 
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
   const [show, setShow] = useState(false)
 
   const [errorInfo, setErrorInfo] = useState({})
@@ -49,20 +50,20 @@ const ProductList = () => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  useEffect(() => {
-    async function fetchProducts(){
-      const config = {
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/products/',
-        headers: {},
-      }
+  // useEffect(() => {
+  //   async function fetchProducts(){
+  //     const config = {
+  //       method: 'get',
+  //       url: 'http://127.0.0.1:8000/api/products/',
+  //       headers: {},
+  //     }
     
-      const response = await axios(config)
-      console.log(response.data)
-      setProducts(response.data)
-    }
-    fetchProducts()
-  }, [])
+  //     const response = await axios(config)
+  //     console.log(response.data)
+  //     setProducts(response.data)
+  //   }
+  //   fetchProducts()
+  // }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault()

@@ -108,6 +108,34 @@
   }
 }
 
+// .dropdown-menu {
+//   position: relative !important;
+// }
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
+
+#basic-nav-dropdown {
+  overflow: visible;
+  z-index: 2;
+}
+
+.home-drop-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 15vw;
+}
+
+#offcanvasNavbar {
+  background: $primary-background;
+}
+
+.search-component {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 300px) and (max-height: 540px) {
   .main-header-div {
     width: 100%;
