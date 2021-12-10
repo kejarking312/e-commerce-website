@@ -1,4 +1,4 @@
-@import "colours";
+@import 'colours';
 
 .main-header-div {
   width: 100%;
@@ -13,7 +13,7 @@
     h1 {
       width: 50%;
       font-size: 0.9em;
-      font-family: "Pacifico";
+      font-family: 'Pacifico';
       margin: auto auto auto 0;
     }
   }
@@ -112,8 +112,16 @@
 //   position: relative !important;
 // }
 
+.navbar-brand {
+  color: $primary-text;
+}
+.nav-item dropdown {
+  width: 20%;
+}
+
 .navbar-nav .dropdown-menu {
   position: absolute;
+  width: 20%;
 }
 
 #basic-nav-dropdown {
@@ -132,8 +140,17 @@
   background: $primary-background;
 }
 
+.d-flex {
+  width: 30%;
+}
+
 .search-component {
   margin-right: 20px;
+  width: 100%;
+}
+
+#search {
+  width: 80%;
 }
 
 @media screen and (max-width: 300px) and (max-height: 540px) {

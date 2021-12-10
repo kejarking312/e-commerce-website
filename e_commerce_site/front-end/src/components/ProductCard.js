@@ -17,7 +17,7 @@ const ProductCard = ({
   image_2,
   image_3,
   price,
-  colour,
+  // colour,
   type,
 }) => {
   const [isError, setIsError] = useState(false)
@@ -58,7 +58,7 @@ const ProductCard = ({
         <Card.Title>
           {brand} {product_model}
         </Card.Title>
-        <Card.Text className="card-text">{colour}</Card.Text>
+        {/* <Card.Text className="card-text">{colour}</Card.Text> */}
         <Link className="product-link" to={`/products/${id}/`}>
           <Carousel className="carousel" fade>
             <Carousel.Item className="carousel-item">
