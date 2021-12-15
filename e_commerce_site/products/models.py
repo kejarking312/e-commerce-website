@@ -87,7 +87,7 @@ class Order(models.Model):
                              on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateField(auto_now_add=True)
-    ordered_date = models.DateField()
+    ordered_date = models.DateField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):

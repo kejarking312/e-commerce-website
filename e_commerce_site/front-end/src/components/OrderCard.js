@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router'
 import { useState } from 'react'
 
 /*eslint camelcase: ["error", {allow: ["start_date", "ordered_date"]}]*/
-const OrderCard = ({ items, ordered_date }) => {
+const OrderCard = ({ items, ordered_date, product, orders, setOrders }) => {
   console.log(items)
-  console.log(items.product)
+  console.log(items[0])
+  console.log(product)
 
   const navigate = useNavigate()
   // const { id } = useParams()
@@ -39,6 +40,7 @@ const OrderCard = ({ items, ordered_date }) => {
       const response = await axios(config).catch(handleError)
       console.log(response.data)
       setIsError(false)
+      setOrders(orders)
       navigate('/products/orders')
     } catch (err) {
       console.log(err)
