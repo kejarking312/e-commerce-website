@@ -70,11 +70,11 @@ I added authentication middleware using JWT, as certain elements of the site, su
 
 The product model was a central point for many of the relationships that connected the database. Each model had an owner attribute to store a foreign key relating to the user who created it, as well as, a category attribute to store a foreign key relating to the category it belonged to. I used a choices widget to create dropdown menus. I also included three additional functions;
 
-####get_absolute_url#### which returns url from product
+`get_absolute_url` which returns url from product
 
-####get_add_to_cart_url#### which returns url to function add item to cart in the views.py file 
+`get_add_to_cart_url` which returns url to function add item to cart in the views.py file 
 
-####get_remove_from_cart_url#### which returns url to function remove item from cart in views.py 
+`get_remove_from_cart_url` which returns url to function remove item from cart in views.py 
 
 Nearly all clothing sites will allow users to select certain clothing categories, most commonly mens, womens and kids clothes. I wanted a separate category model, so when the user wants to navigate the site, they can easily select between these categories. 
 
@@ -89,7 +89,7 @@ I created my urls and views, building CRUD functionality for products as well as
 
 
 
-ORDER ITEM & ORDER MODEL
+### ORDER ITEM & ORDER MODEL
 
 As mentioned, I wanted to have the cart and CRUD functionality to go with it in the backend. I created the Order Item model to store data of the product the user wants to add along with the quantity. The Order model then stores detailed information of the orders made, and has a many to many relationship with the Order Item model, as the same item can be on several orders. 
 
@@ -101,25 +101,25 @@ I used Postbird to visualise my PostgreSQL database and Postman to test my backe
 
 I had initially hoped to add in a model for reviews, but after completing the work on the five models above, my endpoints list was already looking long and I was concerned about frontend development time. I decided to move on to the frontend, and leave reviews as a potential extra feature if I had time. Despite this, I was really happy with the backend build and hadn’t experienced any major setbacks, bar a bit of time lost (but not wasted!) in Django documentation.
 
-FRONTEND
+## <a name='frontend'>FRONTEND</a>
 
 With the backend fresh in my mind, I started my work on the frontend by writing an API request library, where axios requests can be imported to the relevant page. Navigation was handled by React-router and I used Sass to write my own CSS styling. I supplemented some elements with React Bootstrap, such as the offcanvas nav and modal’s for the pop-up windows. 
 
-HOME
+#### HOME
 
 
-ALL ITEMS
-
-
-
-SINGLE ITEM
-
-
-ADD AN ITEM
+#### ALL ITEMS
 
 
 
-WINS & CHALLENGES
+#### SINGLE ITEM
+
+
+#### ADD AN ITEM
+
+
+
+## <a name='wins-challenges'>WINS & CHALLENGES</a>
 
 This was my first time working with Django and Python, and I was really happy that I managed to get some complex relationships, particularly in elements such as adding products to cart. A lot of this came down to reading the Django documentation, which is a skill I’m glad I worked on during this project.
 
@@ -131,18 +131,29 @@ I was happy with the different ways a user can navigate the site, there is a sea
 
 In terms of challenges, it initially took me a while to wrap my head around the relational structure of SQL databases and how the different tables work together. In particular, getting the CRUD functionality of adding items to the order items table and then to the orders table, this was definitely my biggest challenge. 
 
-BUGS & KNOWN ERRORS
+## <a name='bugs'>BUGS & KNOWN ERRORS</a>
 
-The main bug is when adding items to Orders. It works on the back end and when testing in Postman, however there are issues when trying to display this on the Front-end. You can only see two orders on the page and can only see one item per order (unless the same item is added more than once), then if there is less than one order in total the page won't load. 
+The main bug is when adding items to Orders. It works on the back end and when testing in Postman, however there are issues when trying to display this on the Frontend. You can only see two orders on the page and can only see one item per order (unless the same item is added more than once), then if there is less than one order in total the page won't load. 
 
 There are also some styling issues, in particular, on the add an item page, depending on the zoom percentage of the page, the form encroaches on the footer. 
 
 I also didn't have time to add the functionality for the favourites button, or a page which holds only items which are on sale.
 
-FUTURE IMPROVEMENTS
+## <a name='improvements'>FUTURE IMPROVEMENTS</a>
 
 As mentioned above, I styled a favourites button onto the browse all items and single item page, but these are not currently functional. I’d like to add in filtering by size, brand, etc. 
 
 I would work to fix the issue of displaying orders on the orders page. Aslo, while I was happy to improve my understanding of django and relationships between models in the back end, I would like to look at adding the cart on the front end, possibly using redux. 
 
 Add in a review section to each item, where users can post reviews of different items. 
+
+## <a name='learnings'>KEY LEARNINGS</a>
+
+This was my first project working with Python and Django, and I learned a lot about relational databases and the ease that Django’s ORM offers.
+
+Building the entire app solo, I also consolidated my understanding of React, particularly regarding Hooks and passing props and state between components.
+
+Time management! This was a great opportunity to learn what I am capable of when working alone, and how much is achievable. My previous full-stack project had been a group project, so working solo was a new challenge - there wasn’t someone there to balance out weaknesses and more time was spent overcoming blockers. I was definitely optimistic during planning about how much I could achieve in the time frame.
+
+However, I’m really happy I chose to work alone. Building each and every element of a full-stack app really cemented my learnings from the course and turned weaknesses into strengths. In addition, this project marked the end of my Software Engineering Immersive bootcamp, and has been a huge confidence boost for me as I enter a new industry.
+
