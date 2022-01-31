@@ -70,11 +70,9 @@ I added authentication middleware using JWT, as certain elements of the site, su
 
 The product model was a central point for many of the relationships that connected the database. Each model had an owner attribute to store a foreign key relating to the user who created it, as well as, a category attribute to store a foreign key relating to the category it belonged to. I used a choices widget to create dropdown menus. I also included three additional functions;
 
-`get_absolute_url` which returns url from product
-
-`get_add_to_cart_url` which returns url to function add item to cart in the views.py file 
-
-`get_remove_from_cart_url` which returns url to function remove item from cart in views.py 
+- `get_absolute_url` which returns url from product
+- `get_add_to_cart_url` which returns url to function add item to cart in the `views.py` file 
+- `get_remove_from_cart_url` which returns url to function remove item from cart in `views.py`
 
 Nearly all clothing sites will allow users to select certain clothing categories, most commonly mens, womens and kids clothes. I wanted a separate category model, so when the user wants to navigate the site, they can easily select between these categories. 
 
