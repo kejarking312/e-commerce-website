@@ -11,12 +11,19 @@ Note: Heroku servers are put to sleep after 30 minutes of inactivity, so the sit
 TABLE OF CONTENTS
 
 Overview
+
 Planning
+
 Backend
+
 Frontend
+
 Wins & Challenges
+
 Bugs & Known Errors
+
 Future Improvements
+
 Key Learnings
 
 OVERVIEW
@@ -24,21 +31,33 @@ OVERVIEW
 TECHNOLOGIES USED
 
 Python
+
 Django
+
 PostgreSQL
+
 Django REST Framework
+
 JWT
+
 JavaScript (ES6)
+
 React
+
 Axios
+
 Sass
+
 HTTP-proxy-middleware
+
 React Bootstrap
+
 React Router
 
 BRIEF
 
 Build a full-stack application with a React front-end and a Django back-end. It must consume a fully functional RESTful API with all CRUD routes and use multiple relationships. Custom authentication is optional for solo projects.
+
 Wireframes, endpoint mapping, and an entity relationship diagram must be produced prior to development.
 
 PLANNING
@@ -68,8 +87,11 @@ PRODUCT MODEL & CATEGORY MODEL
 The product model was a central point for many of the relationships that connected the database. Each model had an owner attribute to store a foreign key relating to the user who created it, as well as, a category attribute to store a foreign key relating to the category it belonged to. I used a choices widget to create dropdown menus. I also included three additional functions;
 
 get_absolute_url which returns url from product
+
 get_add_to_cart_url which returns url to function add item to cart in the views.py file 
+
 get_remove_from_cart_url which returns url to function remove item from cart in views.py 
+
 Nearly all clothing sites will allow users to select certain clothing categories, most commonly mens, womens and kids clothes. I wanted a separate category model, so when the user wants to navigate the site, they can easily select between these categories. 
 
 
