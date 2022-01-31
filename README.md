@@ -54,9 +54,9 @@ I settled on the idea of an E-commerce website fairly quickly. I really wanted t
 
 The first step was to understand how the relationships between models in the backend would work. I used Google Drawings for my ERD, and Lucidchart for wireframing to map out visuals, endpoints and possible extras.
 
+![image](https://user-images.githubusercontent.com/81522060/151826841-f048e1fa-70d6-4628-8ccb-d1e37552a230.png)
 
-
-
+![image](https://user-images.githubusercontent.com/81522060/151826874-d68bea99-5f4e-400c-a851-2bddf491f539.png)
 
 ## <a name='backend'>BACKEND</a>
 
@@ -65,6 +65,45 @@ To build my relational database, I used five models - users, products, order ite
 ### USER MODEL
 
 The first model I built was my custom User model. I wanted to add some additional fields to Django’s default User model and also have the possibility to edit the model later during the process if necessary. I mapped the custom fields into the User model and then included the default Django User class attributes in a serializer. I used Django REST Framework to build a serializer that checks the password and confirmation match and hashes the user’s password.
+
+```
+
+from rest_framework import serializers
+from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
+
+User = get_user_model()
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(write_only=True)
+    password_confirmation = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+
+        password = data.pop('password')
+        password_confirmation = data.pop('password_confirmation')
+
+        if password != password_confirmation:
+            raise ValidationError(
+                {'password_confirmation': 'Passwords do not match'})
+
+        try:
+            password_validation.validate_password(password=password)
+        except ValidationError as err:
+            raise ValidationError({'password': err.messages})
+
+        data['password'] = make_password(password)
+
+        return data
+
+    class Meta:
+        model = User
+        fields = '__all__'
+        
+```
 
 I added authentication middleware using JWT, as certain elements of the site, such as adding items would require authorisation. Finally, I created login and register views, again using JWT to encode tokens on login.
 
@@ -78,22 +117,146 @@ The product model was a central point for many of the relationships that connect
 
 Nearly all clothing sites will allow users to select certain clothing categories, most commonly mens, womens and kids clothes. I wanted a separate category model, so when the user wants to navigate the site, they can easily select between these categories. 
 
+```
+
+class Product(models.Model):
+    brand = models.CharField(max_length=100)
+    product_model = models.CharField(max_length=100, blank=True, null=True)
+    type = models.CharField(max_length=100)
+    colour = models.CharField(max_length=100)
+    size = models.CharField(choices=SIZES, max_length=2)
+    price = models.DecimalField(decimal_places=2, max_digits=5)
+    discount_price = models.DecimalField(
+        decimal_places=2, max_digits=5, blank=True, null=True)
+    label = models.CharField(choices=LABEL, max_length=2)
+    categorys = models.ForeignKey(
+        "category.Category", on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+                              on_delete=models.CASCADE, blank=True)
+    description = models.CharField(
+        max_length=250, default='', blank=True, null=True)
+    image_1 = models.CharField(max_length=300)
+    image_2 = models.CharField(max_length=300)
+    image_3 = models.CharField(max_length=300)
+
+    def __str__(self):
+        return f"{self.brand} {self.type}"
+
+    def get_absolute_url(self):
+        return reverse("e_commerce_site:product", kwargs={
+            "pk": self.pk
+
+        })
+
+    def get_add_to_cart_url(self):
+        return reverse("e_commerce_site:add-to-cart", kwargs={
+            "pk": self.pk
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("e_commerce_:remove-from-cart", kwargs={
+            "pk": self.pk
+        })
+        
+```
 
 I then created two serializers; one for the Products and one which would populate the owner and categories field into any items on the site.
 
+```
 
+from rest_framework import serializers
+from .models import OrderItem, Product, Order
+from category.models import Category
+from jwt_auth.serializers import UserSerializer
+from category.serializers import CategorySerializer
+from jwt_auth.serializers import SimpleUserSerializer
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+class PopulatedProductSerializer(ProductSerializer):
+    owner = UserSerializer()
+    categorys = CategorySerializer()
+    
+```
 
 I created my urls and views, building CRUD functionality for products as well as adding authentication, so only logged in users can add, edit or delete products. 
 
+```
 
+class ProductListView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    # POST product
 
+    def post(self, request):
+        try:
+            prod = ProductSerializer(data=request.data)
+            if prod.is_valid():
+                prod.save(owner=request.user)
+                return Response(prod.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(prod.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
+    # GET products
+    def get(self, request):
+        try:
+            products = Product.objects.all()
+            serialized_products = PopulatedProductSerializer(
+                products, many=True)
+            return Response(serialized_products.data, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+            
+```
 
+```
+
+urlpatterns = [
+    path('home/', views.home),
+    path('<int:pk>/', ProductDetailView.as_view()),
+    path('', ProductListView.as_view()),
+    path('add-to-cart/<int:pk>/', CartView.as_view(), name='add-to-cart'),
+    path('remove-from-cart/<int:pk>/',
+         CartItemView.as_view(), name='remove-from-cart'),
+    path('orders/', OrderListView.as_view()),
+]
+
+```
 ### ORDER ITEM & ORDER MODEL
 
 As mentioned, I wanted to have the cart and CRUD functionality to go with it in the backend. I created the Order Item model to store data of the product the user wants to add along with the quantity. The Order model then stores detailed information of the orders made, and has a many to many relationship with the Order Item model, as the same item can be on several orders. 
 
+```
 
+class OrderItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product}"
+
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    start_date = models.DateField(auto_now_add=True)
+    ordered_date = models.DateField(auto_now_add=True)
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+```
 
 The main Django project handles requests from the frontend and routes them to the correct model’s URLs.
 
@@ -107,17 +270,19 @@ With the backend fresh in my mind, I started my work on the frontend by writing 
 
 #### HOME
 
+![gif](https://github.com/Shak-H/E-commerce-Website/blob/main/home.gif)
 
 #### ALL ITEMS
 
-
+![gif](https://github.com/Shak-H/E-commerce-Website/blob/main/all-items.gif)
 
 #### SINGLE ITEM
 
+![gif](https://github.com/Shak-H/E-commerce-Website/blob/main/single-item.gif)
 
 #### ADD AN ITEM
 
-
+![gif](https://github.com/Shak-H/E-commerce-Website/blob/main/add-item.gif)
 
 ## <a name='wins-challenges'>WINS & CHALLENGES</a>
 
