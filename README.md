@@ -1,5 +1,7 @@
 # SH SPORTS - GA PROJECT 04
 
+![gif](https://github.com/Shak-H/E-commerce-Website/blob/main/Screen%20Recording%202022-01-28%20at%2015.52.27(1).gif)
+
 This is my final project for the General Assembly Software Engineering Immersive course. SH Sports is a full-stack web app, built with a Python Django API and React.
 
 SH Sports is an E-Commerce website. Users can add, edit and delete their own items, as well as add items to Orders list.
