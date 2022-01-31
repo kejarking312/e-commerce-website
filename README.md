@@ -1,4 +1,4 @@
-SH SPORTS - GA PROJECT 04
+# SH SPORTS - GA PROJECT 04
 
 This is my final project for the General Assembly Software Engineering Immersive course. SH Sports is a full-stack web app, built with a Python Django API and React.
 
@@ -8,59 +8,43 @@ This app has been deployed with Heroku and is available here.
 
 Note: Heroku servers are put to sleep after 30 minutes of inactivity, so the site may be slow to load on the first request. After this, it will behave normally.
 
-TABLE OF CONTENTS
+## TABLE OF CONTENTS
 
-Overview
+- [Overview](#overview)
+  - [Technologies Used](#technologies)
+  - [Brief](#brief)
+- [Planning](#planning)
+- [Backend](#backend)
+- [Frontend](#frontend)
+- [Wins & Challenges](#wins-challenges)
+- [Bugs & Known Errors](#bugs)
+- [Future Improvements](#improvements)
+- [Key Learnings](#learnings)
 
-Planning
+## OVERVIEW
 
-Backend
+### <a name='technologies'>TECHNOLOGIES USED</a>
 
-Frontend
+- Python
+- Django
+- PostgreSQL
+- Django REST Framework
+- JWT
+- JavaScript (ES6)
+- React
+- Axios
+- Sass
+- HTTP-proxy-middleware
+- React Bootstrap
+- React Router
 
-Wins & Challenges
-
-Bugs & Known Errors
-
-Future Improvements
-
-Key Learnings
-
-OVERVIEW
-
-TECHNOLOGIES USED
-
-Python
-
-Django
-
-PostgreSQL
-
-Django REST Framework
-
-JWT
-
-JavaScript (ES6)
-
-React
-
-Axios
-
-Sass
-
-HTTP-proxy-middleware
-
-React Bootstrap
-
-React Router
-
-BRIEF
+### <a name='brief'>BRIEF</a>
 
 Build a full-stack application with a React front-end and a Django back-end. It must consume a fully functional RESTful API with all CRUD routes and use multiple relationships. Custom authentication is optional for solo projects.
 
 Wireframes, endpoint mapping, and an entity relationship diagram must be produced prior to development.
 
-PLANNING
+## <a name='planning'>PLANNING</a>
 
 Our cohort was given the option to work in pairs, groups, or solo on this project. I opted to work solo, as I wanted to consolidate and test my knowledge by building an entire full-stack app.
 
@@ -72,25 +56,25 @@ The first step was to understand how the relationships between models in the bac
 
 
 
-BACKEND
+## <a name='backend'>BACKEND</a>
 
 To build my relational database, I used five models - users, products, order items, orders and categories - with each model mapping to a single table within a PostgreSQL database.
 
-USER MODEL
+### USER MODEL
 
 The first model I built was my custom User model. I wanted to add some additional fields to Django’s default User model and also have the possibility to edit the model later during the process if necessary. I mapped the custom fields into the User model and then included the default Django User class attributes in a serializer. I used Django REST Framework to build a serializer that checks the password and confirmation match and hashes the user’s password.
 
 I added authentication middleware using JWT, as certain elements of the site, such as adding items would require authorisation. Finally, I created login and register views, again using JWT to encode tokens on login.
 
-PRODUCT MODEL & CATEGORY MODEL
+### PRODUCT MODEL & CATEGORY MODEL
 
 The product model was a central point for many of the relationships that connected the database. Each model had an owner attribute to store a foreign key relating to the user who created it, as well as, a category attribute to store a foreign key relating to the category it belonged to. I used a choices widget to create dropdown menus. I also included three additional functions;
 
-get_absolute_url which returns url from product
+####get_absolute_url#### which returns url from product
 
-get_add_to_cart_url which returns url to function add item to cart in the views.py file 
+####get_add_to_cart_url#### which returns url to function add item to cart in the views.py file 
 
-get_remove_from_cart_url which returns url to function remove item from cart in views.py 
+####get_remove_from_cart_url#### which returns url to function remove item from cart in views.py 
 
 Nearly all clothing sites will allow users to select certain clothing categories, most commonly mens, womens and kids clothes. I wanted a separate category model, so when the user wants to navigate the site, they can easily select between these categories. 
 
