@@ -80,7 +80,7 @@ const ProductList = ({ products }) => {
       const response = await axios(config).catch(handleError)
       console.log(response.data)
       setIsError(false)
-      navigate(`/products/${response.data.id}`)
+      navigate(`/products/${response.data.id}/`)
     } catch (err) {
       console.log(err)
     }

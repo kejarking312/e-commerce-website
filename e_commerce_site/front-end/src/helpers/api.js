@@ -14,7 +14,7 @@ export const fetchAllProducts = async () => {
 export const fetchOneProduct = async (id) => {
   const config = {
     method: 'get',
-    url: `http://127.0.0.1:8000/api/products/${id}`,
+    url: `http://127.0.0.1:8000/api/products/${id}/`,
     headers: {},
   }
   const response = await axios(config)
@@ -24,7 +24,7 @@ export const fetchOneProduct = async (id) => {
 export const deleteProduct = async (id) => {
   const config = {
     method: 'delete',
-    url: `http://127.0.0.1:8000/api/products/${id}`,
+    url: `http://127.0.0.1:8000/api/products/${id}/`,
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

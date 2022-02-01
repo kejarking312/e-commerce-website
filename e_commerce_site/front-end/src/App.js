@@ -23,7 +23,7 @@ import Orders from './pages/Orders'
 function App(props) {
   React.useEffect(() => {
     const getData = async () => {
-      const res = await axios.get('/api/products')
+      const res = await axios.get('/api/products/')
       console.log(res.data)
     }
     getData()

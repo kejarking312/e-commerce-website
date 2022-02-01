@@ -52,7 +52,7 @@ const Nav2 = ({ isLoggedIn, setIsLoggedIn, productsData, setProducts }) => {
                   <>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/products/addproduct">
-                      Add your own item
+                      Add an item
                     </NavDropdown.Item>
                   </>
                 ) : (
