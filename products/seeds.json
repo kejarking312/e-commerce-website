@@ -700,36 +700,6 @@
   }
 },
 {
-  "model": "products.orderitem",
-  "pk": 27,
-  "fields": {
-    "user": 4,
-    "ordered": false,
-    "product": 19,
-    "quantity": 1
-  }
-},
-{
-  "model": "products.orderitem",
-  "pk": 28,
-  "fields": {
-    "user": 4,
-    "ordered": false,
-    "product": 1,
-    "quantity": 1
-  }
-},
-{
-  "model": "products.orderitem",
-  "pk": 29,
-  "fields": {
-    "user": 4,
-    "ordered": false,
-    "product": 20,
-    "quantity": 1
-  }
-},
-{
   "model": "products.order",
   "pk": 13,
   "fields": {
@@ -740,20 +710,6 @@
     "items": [
       23,
       19
-    ]
-  }
-},
-{
-  "model": "products.order",
-  "pk": 14,
-  "fields": {
-    "user": 4,
-    "start_date": "2022-01-12",
-    "ordered_date": "2022-01-12",
-    "ordered": false,
-    "items": [
-      28,
-      29
     ]
   }
 }
