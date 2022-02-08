@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware'
 ]
 
-ROOT_URLCONF = 'E-commerce-Website.urls'
+ROOT_URLCONF = 'e_commerce_site.urls'
 
 TEMPLATES = [
     {
