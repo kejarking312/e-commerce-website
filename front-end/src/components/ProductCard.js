@@ -6,7 +6,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../helpers/auth'
-import addtocart from '../styles/images/icons/shopping-cart-add-black.png'
+import addToCart from '../styles/images/icons/shopping-cart-add-black.png'
 import favourite from '../styles/images/icons/heart-black.png'
 /*eslint camelcase: ["error", {allow: ["image_1", "image_2", "image_3", "product_model"]}]*/
 const ProductCard = ({
@@ -86,7 +86,7 @@ const ProductCard = ({
           </Link>
         </Button>
         <Button className="button" onClick={handleAddToCart}>
-          <img src={addtocart} alt="Add to Basket" />
+          <img src={addToCart} alt="Add to Basket" />
         </Button>
         {isError ? (
           <div className="error">
