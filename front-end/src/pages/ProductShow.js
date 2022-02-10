@@ -16,7 +16,7 @@ import Form from 'react-bootstrap/Form'
 
 import login from '../styles/images/icons/user-add.png'
 import signup from '../styles/images/icons/document-signed.png'
-import addtocart from '../styles/images/icons/shopping-cart-add-black.png'
+import addToCart from '../styles/images/icons/shopping-cart-add-black.png'
 import favourite from '../styles/images/icons/heart-black.png'
 
 const ProductShow = ({ isLoggedIn, setIsLoggedIn, products, setProducts }) => {
@@ -233,7 +233,7 @@ const ProductShow = ({ isLoggedIn, setIsLoggedIn, products, setProducts }) => {
                 </Link>
               </Button>
               <Button className="button" onClick={handleAddToCart}>
-                <img src={addtocart} alt="Add to Basket" />
+                <img src={addToCart} alt="Add to Basket" />
               </Button>
               <Button
                 className="edit-product-button button"

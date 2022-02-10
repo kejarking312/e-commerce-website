@@ -48,7 +48,7 @@ const ProductEdit = () => {
 
     const config = {
       method: 'put',
-      url: `http://localhost:8000/api/products/${id},`,
+      url: `http://localhost:8000/api/products/${id}/`,
       headers: { 
         Authorization: `${getToken()}`, 
         'Content-Type': 'application/json',
