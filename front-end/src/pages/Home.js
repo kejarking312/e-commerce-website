@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
 
-  
-
   return (
     <div className="home-container-div">
       <marquee className="sale-div" width="100%" direction="left" height="50px">SALE NOW ON</marquee>
