@@ -110,7 +110,7 @@ const ProductShow = ({ isLoggedIn, setIsLoggedIn, products, setProducts }) => {
 
     try {
       const response = await axios(config).catch(handleError)
-      console.log(response.data.token)
+      console.log(response.data)
       setToken(response.data.token)
       setIsLoggedIn(true)
       setIsError(false)

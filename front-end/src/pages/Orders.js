@@ -6,7 +6,7 @@ import OrderCard from '../components/OrderCard'
 
 const Orders = () => {
   const [orders, setOrders] = useState([])
-
+  
   useEffect(() => {
     async function fetchOrders() {
       const data = ''
@@ -24,12 +24,24 @@ const Orders = () => {
     }
     fetchOrders()
   }, [])
+  console.log(orders.length)
+  console.log(orders)
+  // console.log(orders[0].user)
 
+  for (let i = 0; i < orders.length; i++){
+    console.log(orders[i].user)
+  }
+  
   return (
-    <div className="products-list-div">
-      <ul className="products-list">
+    <div className="orders-list-div">
+      <ul className="orders-list">
+        {/*    
+        <li className="order" >
+          <OrderCard {...orders} />   
+        </li> */}
+    
         {orders.map((o) => (
-          <li className="product" key={o._id}>
+          <li className="order" key={o._id}>
             <OrderCard {...o} />
           </li>
         ))}

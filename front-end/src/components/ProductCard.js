@@ -17,14 +17,12 @@ const ProductCard = ({
   image_2,
   image_3,
   price,
-  // colour,
   type,
 }) => {
   const [isError, setIsError] = useState(false)
 
   const handleError = (error) => {
     if (error.response) {
-      // setErrorInfo(error.response.data)
       setIsError(true)
     }
   }
@@ -46,7 +44,6 @@ const ProductCard = ({
 
       console.log(response.data)
       setIsError(false)
-      // navigate(`/products/${response.data._id}`)
     } catch (err) {
       console.log(err)
     }
@@ -58,7 +55,6 @@ const ProductCard = ({
         <Card.Title>
           {brand} {product_model}
         </Card.Title>
-        {/* <Card.Text className="card-text">{colour}</Card.Text> */}
         <Link className="product-link" to={`/products/${id}/`}>
           <Carousel className="carousel" fade>
             <Carousel.Item className="carousel-item">
